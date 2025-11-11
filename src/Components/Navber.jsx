@@ -26,7 +26,7 @@ const Navber = () => {
         <NavLink to={"/all-books"}>All Books</NavLink>
       </li>
       <li>
-        <NavLink to={"/add-books"}>Add Books</NavLink>
+        <NavLink to={"/add-book"}>Add Books</NavLink>
       </li>
       <li>
         <NavLink to={"/my-books"}>My Books</NavLink>
@@ -35,18 +35,18 @@ const Navber = () => {
   );
   return (
     <div className=" bg-[#FED3D1] ">
-      <MyContainer>
-        <div className=" navbar   ">
+      {/* <MyContainer> */}
+        <div className="md:max-w-11/12 mx-auto navbar   ">
           <div className="navbar-start">
-            <div className="dropdown">
+            <div className="dropdown ">
               <div
                 tabIndex={0}
                 role="button"
-                className="btn btn-ghost lg:hidden"
+                className=" lg:hidden"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
+                  className="h-5 w-5 "
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -67,14 +67,14 @@ const Navber = () => {
                 {links}
               </ul>
             </div>
-            <a className="my-heading font-bold text-xl">
-              <span>The </span>
-              <span>Book </span>
-              <span>Haven</span>
+            <a className="my-heading font-bold md:text-xl">
+              <span className="text-green-800">The </span>
+              <span className="text-amber-600">Book </span>
+              <span className="text-blue-600">Haven</span>
             </a>
           </div>
           <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-3 bg-white/25 rounded-full text-yellow-500">
+            <ul className="menu menu-horizontal px-3 bg-white/25 rounded-full text-green-800">
               {links}
             </ul>
           </div>
@@ -82,13 +82,13 @@ const Navber = () => {
             <div className="space-x-3">
               {
                 user? <>
-                <button onClick={handleSignOut} className="btn">Logout</button>
+                <button onClick={handleSignOut} className="p-2 rounded-sm  bg-green-700 opacity-65 hover:bg-green-500 text-[#FED3D1]">Logout</button>
                 </>:
                 <>
-              <Link to={"/auth/login"} className="btn btn-outline">
+              <Link to={"/auth/login"} className="p-2 rounded-sm  bg-green-700 opacity-65 hover:bg-green-500 text-[#FED3D1]">
                 Login
               </Link>
-              <Link to={"/auth/register"} className="btn btn-outline">
+              <Link to={"/auth/register"} className="p-2 rounded-sm  bg-green-700 opacity-65 hover:bg-green-500 text-[#FED3D1]">
                 Register
               </Link>
                 
@@ -97,7 +97,7 @@ const Navber = () => {
             </div>
           </div>
         </div>
-      </MyContainer>
+      {/* </MyContainer> */}
     </div>
   );
 };

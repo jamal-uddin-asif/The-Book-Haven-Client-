@@ -1,32 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router";
 import { useAuth } from "../../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Register = () => {
-  const {createUser} = useAuth()
+  const {createUser, googleSignIn} = useAuth()
 
+  const [passErr , setPassErr] = useState('')
+
+const passRegEx = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
+
+// console.log(!passRegEx.test('sfkdksllksA'))
+  
   const handleRegister = (e) =>{
     e.preventDefault();
+    setPassErr('')
     const name = e.target.name.value;
     const photo = e.target.photo.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-
+    
     console.log({name, photo, email, password})
+    
+    if(!passRegEx.test(password)){
+      // toast.error('Password not valid')
+      setPassErr("Password must 6 character with 1 upperCase 1 lowerCase ")
+      return
+    }
 
     createUser(email, password)
+    .then(result=>{
+      console.log(result)
+      toast.success("Registration successful")
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+  }
+
+   const handleGoogleSignIn = () =>{
+    googleSignIn()
     .then(result=>{
       console.log(result)
     })
     .catch(err=>{
       console.log(err)
     })
+
+
   }
   return (
-    <div className="flex bg-[#FED3D1]  justify-center items-center  min-h-screen">
+    <div className="flex p-2 bg-[#FED3D1]  justify-center items-center  min-h-screen">
      
-        <div className=" card  bg-white/60 w-full max-w-sm shrink-0 ">
-            <h1 className="text-center py-3 text-2xl font-bold text-[#e3bfbe] ">Register now</h1>
+        <div className=" card   bg-white/60 w-full max-w-sm shrink-0 ">
+            <h1 className="text-center py-3 text-2xl font-bold text-green-700 my-heading ">Register now</h1>
           <form onSubmit={handleRegister} className="px-5 pb-5 ">
             <fieldset className="fieldset">
                 {/* name  */}
@@ -41,9 +69,10 @@ const Register = () => {
                 {/* password  */}
               <label className="label">Password</label>
               <input type="password" name="password" className="input focus:outline-0 rounded-full" placeholder="Password" />
-              <button className="text-[#5d806a] rounded-full text-xl btn bg-linear-to-br from-[#FED3D1] to-[#a58c8b] mt-4">Register</button>
+              <p className="text-red-400">{passErr}</p>
+              <button  className="text-[#5d806a] rounded-full text-xl btn bg-linear-to-br from-[#FED3D1] to-[#a58c8b] mt-4">Register</button>
                   {/* Google */}
-            <button className="btn rounded-full bg-white/40 text-black border-[#e5e5e5]">
+            <button onClick={handleGoogleSignIn} type="button" className="btn rounded-full bg-white/40 text-black border-[#e5e5e5]">
               <svg
                 aria-label="Google logo"
                 width="25"

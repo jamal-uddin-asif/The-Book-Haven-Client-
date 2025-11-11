@@ -12,5 +12,5 @@
 }
 
 a.active{
-  @apply bg-white rounded-full 
+  @apply bg-white rounded-full font-bold
 }
