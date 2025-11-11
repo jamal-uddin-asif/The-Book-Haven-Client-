@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import books from "../../assets/good-books-ok.png";
 import { Link } from "react-router";
 import MyContainer from "../../Components/MyContainer/MyContainer";
+import { useAxiosSecure } from "../../Hooks/useAxiosSecure";
+import LatestBooksCard from "../../Components/Home/LatestBooksCard";
 
 const Home = () => {
+  const axiosSecure = useAxiosSecure()
+ const [latestBooks, setLatestBooks] = useState([])
+ const [loading, setLoading] = useState(true)
+
+console.log(latestBooks)
+ useEffect(()=>{
+  axiosSecure.get('/latest-books')
+  .then(data=>{
+    setLatestBooks(data.data)
+    setLoading(false)
+  })
+ })
+
+
+
+
   return (
     <div className="bg-[#FED3D1]">
       {/* banner  */}
@@ -48,9 +66,13 @@ const Home = () => {
 
         <div className="md:grid grid-cols-12">
           {/* books  */}
-          <div className="col-span-8 bg-green-600">
-            <h1>Latest Books here</h1>
-            
+          <div className="col-span-8 ">
+            <h1 className="border-b mb-4 my-heading py-4 text-2xl">Latest Books here</h1>
+            <div className="grid grid-cols-3 gap-6">
+              {
+                latestBooks?.map(book=><LatestBooksCard book={book}></LatestBooksCard>)
+              }
+            </div>
           </div>
           {/* book of the week  */}
           <div className="col-span-4 bg-red-700">
