@@ -3,6 +3,7 @@ import boy from "../../assets/boy.jpg";
 import MyContainer from "../../Components/MyContainer/MyContainer";
 import { useAuth } from "../../Hooks/useAuth";
 import { useAxiosSecure } from "../../Hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 const AddBook = () => {
     const {user} = useAuth()
@@ -23,6 +24,11 @@ const AddBook = () => {
         const create_at = new Date
 
         // console.log({title, author, genre, rating, coverImage, summary, userEmail, userName, create_at})
+
+        if(!title || !author || !genre || !rating || !coverImage || !summary ){
+            toast.error("Fill the form please")
+            return
+        }
         const newBook = {
             title,
             author, 
@@ -35,10 +41,12 @@ const AddBook = () => {
             summary, 
 
         }
+        
 
         axiosSecure.post('/books', newBook)
         .then(data=>{
             console.log(data)
+            toast.success("Book Added")
         })
 
 

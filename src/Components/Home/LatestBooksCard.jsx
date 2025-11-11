@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 const LatestBooksCard = ({ book }) => {
   return (
-    <div className="border-l-2 hover:text-white rounded-2xl hover:scale-110 transition ease-in-out hover:border-green-400 hover:bg-blue-950 ">
+    <div className="border-l-2 hover:border-l-5 hover:text-white rounded-2xl hover:scale-110 duration-200 transition ease-in-out hover:border-green-400 hover:bg-blue-950 ">
       <div className="border-b-2 hover:border-green-400 ">
         <img
           className="h-[150px] pl-3 hover:scale-110 transition ease-in-out"
@@ -15,9 +15,9 @@ const LatestBooksCard = ({ book }) => {
       </div>
 
       <div className=" space-y-2 pl-3 pt-2">
-        <h2 className="my-heading">Author {book.author}</h2>
-        <p className="my-heading">Genre: {book.genre}</p>
-        <p className="line-clamp-2 my-heading">Summary: {book.summary}</p>
+        <h2 className="my-heading">Author : {book.author}</h2>
+        <p className="my-heading">Genre : {book.genre}</p>
+        <p className="line-clamp-2 my-heading">Summary : {book.summary}</p>
         <div className="flex flex-col ">
           <div className="bg-amber-300 px-2 text-green-700 rounded-sm inline ">
             {" "}
