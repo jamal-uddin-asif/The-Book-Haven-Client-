@@ -7,6 +7,7 @@ import MyBooks from "../Pages/MyBooks/MyBooks";
 import AddBook from "../Pages/Add-book/AddBook";
 import Home from "../Pages/Home/Home";
 import BookDetails from "../Pages/BookDetails/BookDetails";
+import PageNotFound from "../Pages/PageNotFound";
 
 export const router = createBrowserRouter([
   {
@@ -40,7 +41,12 @@ export const router = createBrowserRouter([
       {
         path: 'book-details/:id',
         element:<BookDetails></BookDetails>
+      },
+      {
+        path: '/*',
+        Component: PageNotFound
       }
+
       
     ],
   },
