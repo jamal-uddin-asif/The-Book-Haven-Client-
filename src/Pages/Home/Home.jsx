@@ -10,7 +10,6 @@ const Home = () => {
  const [latestBooks, setLatestBooks] = useState([])
  const [loading, setLoading] = useState(true)
 
-console.log(latestBooks)
  useEffect(()=>{
   axiosSecure.get('/latest-books')
   .then(data=>{
@@ -68,7 +67,7 @@ console.log(latestBooks)
           {/* books  */}
           <div className="col-span-8 ">
             <h1 className="border-b mb-4 my-heading py-4 text-2xl">Latest Books here</h1>
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {
                 latestBooks?.map(book=><LatestBooksCard book={book}></LatestBooksCard>)
               }

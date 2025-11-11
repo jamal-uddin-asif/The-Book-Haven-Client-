@@ -3,13 +3,13 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-.my-heading {
-  font-family: "Mona Sans", sans-serif;
-}
+/* .my-heading {
+} */
 
 * {
-  font-family: "Roboto", sans-serif;
+  font-family: "Mona Sans", sans-serif;
 }
+/* font-family: "Roboto", sans-serif; */
 
 a.active{
   @apply bg-white rounded-full font-bold
