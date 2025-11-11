@@ -1,0 +1,37 @@
+import { createBrowserRouter } from "react-router";
+import RootLayout from "../Layouts/RootLayout";
+import Home from "../Pages/Home/Home";
+import AllBooks from "../Pages/AllBooks/AllBooks";
+import Login from "../Pages/Auth/Login";
+import Register from "../Pages/Auth/Register";
+import MyBooks from "../Pages/MyBooks/MyBooks";
+
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    Component: RootLayout,
+    children: [
+      {
+        index: true,
+        Component: Home,
+      },
+      {
+        path: "all-books",
+        Component: AllBooks,
+      },
+      {
+        path: 'auth/login',
+        Component: Login
+      },
+      {
+        path: 'auth/register',
+        Component: Register
+      },
+      {
+        path: 'my-books',
+        Component: MyBooks
+      }
+      
+    ],
+  },
+]);
