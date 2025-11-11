@@ -3,6 +3,11 @@ import { Link, NavLink } from "react-router";
 import MyContainer from "./MyContainer/MyContainer";
 import { useAuth } from "../Hooks/useAuth";
 import toast from "react-hot-toast";
+import { FaBookOpenReader, FaHouseChimney } from "react-icons/fa6";
+import { SiWikibooks } from "react-icons/si";
+import { BiSolidBookAdd } from "react-icons/bi";
+import { TbLogout } from "react-icons/tb";
+import { IoIosLogIn } from "react-icons/io";
 
 const Navber = () => {
   const {user, signOutUser} = useAuth()
@@ -20,16 +25,16 @@ const Navber = () => {
   const links = (
     <>
       <li>
-        <NavLink to={"/"}>Home</NavLink>
+        <NavLink to={"/"}><FaHouseChimney />Home</NavLink>
       </li>
       <li>
-        <NavLink to={"/all-books"}>All Books</NavLink>
+        <NavLink to={"/all-books"}><SiWikibooks />All Books</NavLink>
       </li>
       <li>
-        <NavLink to={"/add-book"}>Add Books</NavLink>
+        <NavLink to={"/add-book"}><BiSolidBookAdd />Add Books</NavLink>
       </li>
       <li>
-        <NavLink to={"/my-books"}>My Books</NavLink>
+        <NavLink to={"/my-books"}><FaBookOpenReader />My Books</NavLink>
       </li>
     </>
   );
@@ -82,11 +87,11 @@ const Navber = () => {
             <div className="space-x-3">
               {
                 user? <>
-                <button onClick={handleSignOut} className="p-2 rounded-sm  bg-green-700 opacity-65 hover:bg-green-500 text-[#FED3D1]">Logout</button>
+                <button onClick={handleSignOut} className="p-2 rounded-sm  bg-green-700 opacity-65 hover:bg-green-500 text-[#FED3D1] flex items-center space-x-1.5"><span>Logout</span> <TbLogout /></button>
                 </>:
                 <>
               <Link to={"/auth/login"} className="p-2 rounded-sm  bg-green-700 opacity-65 hover:bg-green-500 text-[#FED3D1]">
-                Login
+               Login
               </Link>
               <Link to={"/auth/register"} className="p-2 rounded-sm  bg-green-700 opacity-65 hover:bg-green-500 text-[#FED3D1]">
                 Register

@@ -4,6 +4,7 @@ import { Link } from "react-router";
 import MyContainer from "../../Components/MyContainer/MyContainer";
 import { useAxiosSecure } from "../../Hooks/useAxiosSecure";
 import LatestBooksCard from "../../Components/Home/LatestBooksCard";
+import { BiSolidBookAdd } from "react-icons/bi";
 
 const Home = () => {
   const axiosSecure = useAxiosSecure()
@@ -31,7 +32,7 @@ const Home = () => {
         <div className="relative  ">
           <div className="  md:flex py-15  items-center justify-center text-center ">
             <div className="space-y-4">
-              <h1 className=" text-2xl text-green-800 font-bold  md:text-3xl  lg:text-5xl my-heading ">
+              <h1 className="animate-bounce text-2xl text-green-800 font-bold  md:text-3xl  lg:text-5xl my-heading ">
                 Your Personal Library, Reimagined
               </h1>
               <div className="my-heading rounded-full text-yellow-700 mb-4  ">
@@ -52,7 +53,7 @@ const Home = () => {
               to={"/all-books"}
               className=" p-2 rounded-sm  bg-green-700 opacity-65 hover:bg-green-500"
             >
-              All Books
+            All Books
             </Link>
             <Link to={"/add-book"} className=" p-2 rounded-sm bg-green-700 hover:bg-green-500 opacity-60 shadow-2xl">
               Create Book
