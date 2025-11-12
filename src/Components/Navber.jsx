@@ -87,13 +87,13 @@ const Navber = () => {
             <div className="space-x-3">
               {
                 user? <>
-                <button onClick={handleSignOut} className="p-2 rounded-sm  bg-green-700 opacity-65 hover:bg-green-500 text-[#FED3D1] flex items-center space-x-1.5"><span>Logout</span> <TbLogout /></button>
+                <button onClick={handleSignOut} className="p-2 rounded-sm   bg-blue-950 text-[#FED3D1] shadow-sm shadow-blue-950 opacity-65 hover:bg-green-500  flex items-center space-x-1.5"><span>Logout</span> <TbLogout /></button>
                 </>:
                 <>
-              <Link to={"/auth/login"} className="p-2 rounded-sm  bg-green-700 opacity-65 hover:bg-green-500 text-[#FED3D1]">
+              <Link to={"/auth/login"} className="p-2 rounded-sm   bg-blue-950 text-[#FED3D1] shadow-sm shadow-blue-950 opacity-65 hover:bg-green-500 ">
                Login
               </Link>
-              <Link to={"/auth/register"} className="p-2 rounded-sm  bg-green-700 opacity-65 hover:bg-green-500 text-[#FED3D1]">
+              <Link to={"/auth/register"} className="p-2 rounded-sm   bg-blue-950 text-[#FED3D1] shadow-sm shadow-blue-950 opacity-65 hover:bg-green-500 ">
                 Register
               </Link>
                 

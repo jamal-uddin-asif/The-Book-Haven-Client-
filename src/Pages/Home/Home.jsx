@@ -49,13 +49,13 @@ const Home = () => {
             <div className="absolute bottom-5 left-5 space-x-2 ">
               <Link
                 to={"/all-books"}
-                className=" p-2 rounded-sm  bg-green-700 opacity-65 hover:bg-green-500"
+                className=" p-2 rounded-sm  bg-blue-950 text-[#FED3D1] shadow-xl shadow-blue-950 opacity-65 hover:bg-green-500"
               >
                 All Books
               </Link>
               <Link
                 to={"/add-book"}
-                className=" p-2 rounded-sm bg-green-700 hover:bg-green-500 opacity-60 shadow-2xl"
+                className=" p-2 rounded-sm  bg-blue-950 text-[#FED3D1] shadow-xl shadow-blue-950 hover:bg-green-500 opacity-60 shadow-xl"
               >
                 Create Book
               </Link>
