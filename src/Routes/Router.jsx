@@ -8,6 +8,7 @@ import AddBook from "../Pages/Add-book/AddBook";
 import Home from "../Pages/Home/Home";
 import BookDetails from "../Pages/BookDetails/BookDetails";
 import PageNotFound from "../Pages/PageNotFound";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -32,15 +33,15 @@ export const router = createBrowserRouter([
       },
       {
         path: 'my-books',
-        Component: MyBooks
+       element: <PrivateRoute><MyBooks></MyBooks></PrivateRoute>
       },
       {
         path: 'add-book',
-        element: <AddBook></AddBook>
+        element: <PrivateRoute><AddBook></AddBook></PrivateRoute>
       },
       {
         path: 'book-details/:id',
-        element:<BookDetails></BookDetails>
+        element:<PrivateRoute><BookDetails></BookDetails></PrivateRoute>
       },
       {
         path: '/*',

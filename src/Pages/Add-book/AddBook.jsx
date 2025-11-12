@@ -45,7 +45,8 @@ const AddBook = () => {
 
         axiosSecure.post('/books', newBook)
         .then(data=>{
-            console.log(data)
+            // console.log(data)
+            e.target.reset()
             toast.success("Book Added")
         })
 

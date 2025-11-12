@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router";
 import { useAuth } from "../../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Login = () => {
-  const { signInUser, user, googleSignIn } = useAuth();
+  const { signInUser, user, googleSignIn, setLoading } = useAuth();
   console.log(user)
 
   const handleLogin = (e) => {
@@ -14,7 +15,10 @@ const Login = () => {
 
     signInUser(email, password)
     .then(result=>{
-      console.log(result)
+      // console.log(result)
+      setLoading(false)
+      toast.success('SignIn successful')
+
     })
     .catch(err=>{
       console.log(err)
@@ -24,7 +28,10 @@ const Login = () => {
   const handleGoogleSignIn = () =>{
     googleSignIn()
     .then(result=>{
-      console.log(result)
+      // console.log(result)
+      setLoading(false)
+      toast.success("SignIn successful")
+
     })
     .catch(err=>{
       console.log(err)

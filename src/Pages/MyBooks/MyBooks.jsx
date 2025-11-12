@@ -6,6 +6,7 @@ import { FaStar } from "react-icons/fa6";
 import { Link } from "react-router";
 import { SyncLoader } from "react-spinners";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const MyBooks = () => {
   const { user } = useAuth();
@@ -13,7 +14,7 @@ const MyBooks = () => {
   const [books, setMyBooks] = useState([]);
   const [updateBook, setUpdateBook] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [refresh, setRefresh] = useState(true)
+  const [refresh, setRefresh] = useState(true);
 
   const axiosSecure = useAxiosSecure();
 
@@ -25,12 +26,28 @@ const MyBooks = () => {
   }, [user, axiosSecure, refresh]);
 
   const handleDelete = (id) => {
-    axiosSecure.delete(`/delete-book/${id}`).then((data) => {
-      console.log(data);
-      if (data.data.deletedCount) {
-        const filter = books.filter((book) => book._id !== id);
-        setMyBooks(filter);
-        toast.success("Book Deleted");
+    Swal.fire({
+      title: "Are you want to delete this book?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Delete!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/delete-book/${id}`).then((data) => {
+          console.log(data);
+          if (data.data.deletedCount) {
+            const filter = books.filter((book) => book._id !== id);
+            setMyBooks(filter);
+            Swal.fire({
+              title: "Book Deleted!",
+              text: "Your Book has been deleted.",
+              icon: "success",
+            });
+          }
+        });
       }
     });
   };
@@ -83,7 +100,7 @@ const MyBooks = () => {
           console.log(data.data);
           modalRef.current.close();
           toast.success("Book updated");
-          setRefresh(!true)
+          setRefresh(!true);
         }
       });
   };

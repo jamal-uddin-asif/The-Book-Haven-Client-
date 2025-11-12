@@ -4,7 +4,7 @@ import { useAuth } from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 
 const Register = () => {
-  const {createUser, googleSignIn} = useAuth()
+  const {createUser, googleSignIn, setLoading} = useAuth()
 
   const [passErr , setPassErr] = useState('')
 
@@ -31,7 +31,8 @@ const passRegEx = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 
     createUser(email, password)
     .then(result=>{
-      console.log(result)
+      // console.log(result)
+      setLoading(false)
       toast.success("Registration successful")
     })
     .catch(err=>{
@@ -42,7 +43,9 @@ const passRegEx = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
    const handleGoogleSignIn = () =>{
     googleSignIn()
     .then(result=>{
-      console.log(result)
+      // console.log(result)
+      setLoading(false)
+      toast.success("Signin successful")
     })
     .catch(err=>{
       console.log(err)
