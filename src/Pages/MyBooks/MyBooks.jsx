@@ -34,14 +34,30 @@ const MyBooks = () => {
     });
   };
 
-  const handleUpdate = (id) => {
+  const handleOpenModalAndFetch = (id) => {
     modalRef.current.showModal();
-
     axiosSecure.get(`/bookDetails/${id}`).then((data) => {
       console.log(data.data);
       setUpdateBook(data.data);
     });
   };
+
+  const handleUpdate = (e) =>{
+    e.preventDefault()
+
+        const title = e.target.title.value;
+        const author = e.target.author.value;
+        const genre = e.target.genre.value;
+        const rating = e.target.rating.value;
+        const coverImage = e.target.coverImage.value;
+        const summary = e.target.summary.value;
+        const userEmail = user?.email;
+        const userName = user?.displayName;
+
+        console.log({title, author, genre, rating, coverImage, summary, userEmail, userName})
+    
+    
+  }
 
   if (loading) {
     return (
@@ -104,7 +120,7 @@ const MyBooks = () => {
                       </td>
                       <td>
                         <button
-                          onClick={() => handleUpdate(book?._id)}
+                          onClick={() => handleOpenModalAndFetch(book?._id)}
                           className="bg-green-600 text-[#FED3D1] p-1.5 rounded-sm"
                         >
                           Update
@@ -147,7 +163,7 @@ const MyBooks = () => {
                   <h1 className="text-center py-3 text-2xl font-bold text-green-700 my-heading ">
                     Update Your Book
                   </h1>
-                  <form className="px-5 pb-5 ">
+                  <form onSubmit={handleUpdate} className="px-5 pb-5 ">
                     <fieldset className="fieldset">
                       <label className="label">Title</label>
                       <input
@@ -222,8 +238,7 @@ const MyBooks = () => {
                 </div>
               </div>
               <form method="dialog">
-                {/* if there is a button in form, it will close the modal */}
-                <button className="btn btn-outline bg-red-600 text-white">
+                <button className="rounded-sm px-2 py-1 bg-red-600 text-white">
                   X
                 </button>
               </form>
