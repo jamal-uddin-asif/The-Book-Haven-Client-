@@ -13,6 +13,7 @@ const MyBooks = () => {
   const [books, setMyBooks] = useState([]);
   const [updateBook, setUpdateBook] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [refresh, setRefresh] = useState(true)
 
   const axiosSecure = useAxiosSecure();
 
@@ -21,7 +22,7 @@ const MyBooks = () => {
       setMyBooks(data.data);
       setLoading(false);
     });
-  }, [user, axiosSecure]);
+  }, [user, axiosSecure, refresh]);
 
   const handleDelete = (id) => {
     axiosSecure.delete(`/delete-book/${id}`).then((data) => {
@@ -42,22 +43,50 @@ const MyBooks = () => {
     });
   };
 
-  const handleUpdate = (e) =>{
-    e.preventDefault()
+  const handleUpdate = (e) => {
+    e.preventDefault();
 
-        const title = e.target.title.value;
-        const author = e.target.author.value;
-        const genre = e.target.genre.value;
-        const rating = e.target.rating.value;
-        const coverImage = e.target.coverImage.value;
-        const summary = e.target.summary.value;
-        const userEmail = user?.email;
-        const userName = user?.displayName;
+    const title = e.target.title.value;
+    const author = e.target.author.value;
+    const genre = e.target.genre.value;
+    const rating = e.target.rating.value;
+    const coverImage = e.target.coverImage.value;
+    const summary = e.target.summary.value;
+    const userEmail = user?.email;
+    const userName = user?.displayName;
 
-        console.log({title, author, genre, rating, coverImage, summary, userEmail, userName})
-    
-    
-  }
+    const forUpdate = {
+      title,
+      author,
+      genre,
+      rating,
+      coverImage,
+      summary,
+      userEmail,
+      userName,
+    };
+    console.log({
+      title,
+      author,
+      genre,
+      rating,
+      coverImage,
+      summary,
+      userEmail,
+      userName,
+    });
+
+    axiosSecure
+      .patch(`/update-Book/${updateBook._id}`, forUpdate)
+      .then((data) => {
+        if (data.data.modifiedCount) {
+          console.log(data.data);
+          modalRef.current.close();
+          toast.success("Book updated");
+          setRefresh(!true)
+        }
+      });
+  };
 
   if (loading) {
     return (
