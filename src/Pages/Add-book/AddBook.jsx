@@ -52,7 +52,7 @@ const AddBook = () => {
 
     }
   return (
-    <div>
+    <div className="">
       <MyContainer>
         <div className="my-5 flex justify-around  rounded-2xl bg-blue-950/80 min-h-screen :">
           <div className="md:flex gap-7 p-2   justify-center items-center  min-h-screen">

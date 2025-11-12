@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import MyContainer from "../../Components/MyContainer/MyContainer";
 import { useAuth } from "../../Hooks/useAuth";
 import { useAxiosSecure } from "../../Hooks/useAxiosSecure";
 import { FaStar } from "react-icons/fa6";
 import { Link } from "react-router";
 import { SyncLoader } from "react-spinners";
+import toast from "react-hot-toast";
 
 const MyBooks = () => {
   const { user } = useAuth();
+  const modalRef = useRef("");
   const [books, setMyBooks] = useState([]);
+  const [updateBook, setUpdateBook] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const axiosSecure = useAxiosSecure();
@@ -21,17 +24,23 @@ const MyBooks = () => {
   }, [user, axiosSecure]);
 
   const handleDelete = (id) => {
-    
-    axiosSecure.delete(`/delete-book/${id}`)
-    .then(data=>{
-        console.log(data)
-        if(data.data.deletedCount){
-            const filter = books.filter(book=> book._id !== id)
-            setMyBooks(filter)
-        }
+    axiosSecure.delete(`/delete-book/${id}`).then((data) => {
+      console.log(data);
+      if (data.data.deletedCount) {
+        const filter = books.filter((book) => book._id !== id);
+        setMyBooks(filter);
+        toast.success("Book Deleted");
+      }
+    });
+  };
 
-    })
+  const handleUpdate = (id) => {
+    modalRef.current.showModal();
 
+    axiosSecure.get(`/bookDetails/${id}`).then((data) => {
+      console.log(data.data);
+      setUpdateBook(data.data);
+    });
   };
 
   if (loading) {
@@ -94,7 +103,10 @@ const MyBooks = () => {
                         </div>
                       </td>
                       <td>
-                        <button className="bg-green-600 text-[#FED3D1] p-1.5 rounded-sm">
+                        <button
+                          onClick={() => handleUpdate(book?._id)}
+                          className="bg-green-600 text-[#FED3D1] p-1.5 rounded-sm"
+                        >
                           Update
                         </button>
                       </td>
@@ -114,6 +126,111 @@ const MyBooks = () => {
           </div>
         </div>
       </MyContainer>
+
+      <div>
+        {/* Open the modal using document.getElementById('ID').showModal() method */}
+        {/* <button
+          className="btn"
+          onClick={() => document.getElementById("my_modal_5").showModal()}
+        >
+          open modal
+        </button> */}
+        <dialog
+          ref={modalRef}
+          id="my_modal_5"
+          className="modal modal-bottom sm:modal-middle"
+        >
+          <div className="modal-box">
+            <div className="modal-action">
+              <div>
+                <div className=" card   bg-white/10 w-full max-w-sm shrink-0 ">
+                  <h1 className="text-center py-3 text-2xl font-bold text-green-700 my-heading ">
+                    Update Your Book
+                  </h1>
+                  <form className="px-5 pb-5 ">
+                    <fieldset className="fieldset">
+                      <label className="label">Title</label>
+                      <input
+                        type="text"
+                        name="title"
+                        className="input   focus:outline-0 rounded-xl "
+                        placeholder="Title"
+                        defaultValue={updateBook.title}
+                      />
+
+                      <label className="label">Author</label>
+                      <input
+                        type="text"
+                        name="author"
+                        className="input focus:outline-0 rounded-xl"
+                        placeholder="Author"
+                        defaultValue={updateBook.author}
+                      />
+
+                      {/* genre  */}
+                      <div className="flex gap-2 justify-around items-center">
+                        <div>
+                          <label className="label">Genre</label>
+                          <select
+                            defaultValue={updateBook.genre}
+                            className="select "
+                            name="genre"
+                          >
+                            <option disabled={true}>Pick one</option>
+                            <option value="Fantasy">Fantasy</option>
+                            <option value="Mystery">Mystery</option>
+                            <option value="Not-Fiction">Not-Fiction</option>
+                            <option value="Other">Other</option>
+                          </select>
+                        </div>
+
+                        <div>
+                          <label className="label">Rating</label>
+                          <input
+                            type="text"
+                            name="rating"
+                            className="input focus:outline-0 rounded-xl"
+                            placeholder="Rating"
+                            defaultValue={updateBook.rating}
+                          />
+                        </div>
+                      </div>
+
+                      <label className="label">Cover Image</label>
+                      <input
+                        type="url"
+                        name="coverImage"
+                        className="input focus:outline-0 rounded-xl"
+                        placeholder="Image URL"
+                        defaultValue={updateBook.coverImage}
+                      />
+
+                      <label className="label">Summary</label>
+                      <textarea
+                        className="bg-blue-200 rounded-2xl p-2"
+                        name="summary"
+                        rows={8}
+                        cols={9}
+                        defaultValue={updateBook.summary}
+                      ></textarea>
+
+                      <button className="text-[#5d806a] rounded-full text-xl btn bg-linear-to-br from-[#FED3D1] to-[#a58c8b] mt-4">
+                        Update Now
+                      </button>
+                    </fieldset>
+                  </form>
+                </div>
+              </div>
+              <form method="dialog">
+                {/* if there is a button in form, it will close the modal */}
+                <button className="btn btn-outline bg-red-600 text-white">
+                  X
+                </button>
+              </form>
+            </div>
+          </div>
+        </dialog>
+      </div>
     </div>
   );
 };
