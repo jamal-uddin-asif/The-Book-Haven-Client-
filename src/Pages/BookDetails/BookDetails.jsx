@@ -19,11 +19,11 @@ const BookDetails = () => {
   return (
     <div>
       <MyContainer>
-        <div className="md:flex py-10 bg-blue-950/80 rounded-2xl mt-5 text-white">
+        <div className="md:flex py-10  bg-blue-950/80 rounded-2xl mt-5 text-white">
           <div className="flex-1 px-2">
             <img className="max-h-[400px] mx-auto" src={book.coverImage} alt="" />
           </div>
-          <div className="flex-1 overflow-scroll p-3">
+          <div className="flex-1 max-h-screen overflow-scroll p-3">
             <div className="border-b pb-3">
               <h1 className="font-bold  text-3xl">{book.title}</h1>
               <h3>Author: {book.author}</h3>

@@ -4,6 +4,7 @@ import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
 import MyContainer from "../../Components/MyContainer/MyContainer";
 import { Link } from "react-router";
 import { FaStar } from "react-icons/fa6";
+import { SyncLoader } from "react-spinners";
 
 const AllBooks = () => {
   const [books, setBooks] = useState([]);
@@ -28,7 +29,9 @@ const AllBooks = () => {
   }, [axiosSecure]);
 
   if (loading) {
-    return <LoadingSpinner></LoadingSpinner>;
+    return <div className="bg-[#FED3D1] flex justify-center items-center min-h-screen">
+         <SyncLoader/>
+    </div>;
   }
 
   return (
