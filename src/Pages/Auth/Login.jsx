@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { useAuth } from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
@@ -39,6 +39,11 @@ const Login = () => {
         toast.error(err.code);
       });
   };
+
+  
+      useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
   return (
     <div className="flex p-2 bg-[#FED3D1]  justify-center items-center  min-h-screen">
       <div className=" card  bg-white/60 w-full max-w-sm shrink-0 ">

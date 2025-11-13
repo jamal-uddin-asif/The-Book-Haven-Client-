@@ -77,41 +77,11 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="">
-            <h1 className="border-b mb-4 my-heading py-4 text-2xl">
-              Feature of this web
-            </h1>
-            <div className="sm:flex space-y-4 text-center justify-center gap-7 py-6">
-              <div className="bg-linear-to-br from-green-400 to-green-800 p-6 rounded-2xl hover:scale-105 transition ease-in-out text-white">
-                <div className="flex justify-center">
-                  <FaBookOpenReader size={30} />
-                </div>
-                Read book
-              </div>
-              <div className="bg-linear-to-br from-orange-400 to-orange-700 p-6 rounded-2xl hover:scale-105 transition ease-in-out text-white">
-                <div className="flex justify-center">
-                  <BiSolidBookAdd size={30} />
-                </div>
-                Add book
-              </div>
-              <div className="bg-linear-to-br from-yellow-300 to-yellow-600 p-6 rounded-2xl hover:scale-105 transition ease-in-out text-white">
-                <div className="flex justify-center">
-                  <TiEdit size={30} />
-                </div>
-                Edit book
-              </div>
-              <div className="bg-linear-to-br from-red-500 to-red-800 p-6 rounded-2xl hover:scale-105 transition ease-in-out text-white">
-                <div className="flex justify-center">
-                  <MdAutoDelete size={30} />
-                </div>
-                Delete book
-              </div>
-            </div>
-          </div>
+          
 
           {/* books section  */}
 
-          <div className="md:grid grid-cols-12">
+          <div className="md:grid gap-3 grid-cols-12">
             {/* books  */}
             <div className="col-span-8 ">
               <h1 className="border-b mb-4 my-heading py-4 text-2xl">
@@ -142,6 +112,38 @@ const Home = () => {
                 Peale claimed that such techniques would give the reader a
                 higher satisfaction and quality of life. The book was negatively
                 reviewed by scholars and health experts{" "}
+              </div>
+            </div>
+          </div>
+
+          <div className="">
+            <h1 className="border-b mb-4 my-heading py-4 text-2xl">
+              Feature of this web
+            </h1>
+            <div className="sm:flex space-y-4 text-center justify-center gap-7 py-6">
+              <div className="bg-linear-to-br from-green-400 to-green-800 p-6 rounded-2xl hover:scale-105 transition ease-in-out text-white">
+                <div className="flex justify-center">
+                  <FaBookOpenReader size={30} />
+                </div>
+                Read book
+              </div>
+              <div className="bg-linear-to-br from-orange-400 to-orange-700 p-6 rounded-2xl hover:scale-105 transition ease-in-out text-white">
+                <div className="flex justify-center">
+                  <BiSolidBookAdd size={30} />
+                </div>
+                Add book
+              </div>
+              <div className="bg-linear-to-br from-yellow-300 to-yellow-600 p-6 rounded-2xl hover:scale-105 transition ease-in-out text-white">
+                <div className="flex justify-center">
+                  <TiEdit size={30} />
+                </div>
+                Edit book
+              </div>
+              <div className="bg-linear-to-br from-red-500 to-red-800 p-6 rounded-2xl hover:scale-105 transition ease-in-out text-white">
+                <div className="flex justify-center">
+                  <MdAutoDelete size={30} />
+                </div>
+                Delete book
               </div>
             </div>
           </div>

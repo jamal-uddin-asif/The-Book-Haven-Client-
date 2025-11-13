@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useAuth } from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
@@ -66,6 +66,13 @@ const passRegEx = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 
 
   }
+
+  
+      useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
+
+    
   return (
     <div className="flex p-2 bg-[#FED3D1]  justify-center items-center  min-h-screen">
      

@@ -9,12 +9,19 @@ import { BiSolidBookAdd } from "react-icons/bi";
 import { TbLogout } from "react-icons/tb";
 import { IoIosLogIn } from "react-icons/io";
 import { BarLoader } from "react-spinners";
+import { Tooltip } from "react-tooltip";
+import 'react-tooltip/dist/react-tooltip.css'
+import { format } from "date-fns";
+
+
 
 
 const Navber = () => {
   const { user, signOutUser, setLoading, loading } = useAuth();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   console.log(user);
+
+  
 
   // Theme toggle
 
@@ -72,6 +79,7 @@ const Navber = () => {
   );
   return (
     <div className=" bg-[#FED3D1] ">
+      
       {/* <MyContainer> */}
       <div className="md:max-w-11/12 mx-auto navbar   ">
         <div className="navbar-start">
@@ -123,7 +131,8 @@ const Navber = () => {
           <div className="space-x-3">
             {user ? (
               <>
-                <div className="flex gap-1">
+              
+                <div id="hoverImg"  data-tooltip-id="hoverImg" data-tooltip-content={user?.displayName} className="flex gap-1">
                   <button
                     className=""
                     popoverTarget="popover-1"
@@ -131,9 +140,12 @@ const Navber = () => {
                       { anchorName: "--anchor-1" } /* as React.CSSProperties */
                     }
                   >
+                    <Tooltip id="Asif" />
                     {user.photoURL ? (
                       
                       <img
+                         data-tooltip-id="Asif"
+                         data-tooltip-content={user?.displayName}
                         className="h-10 w-10 rounded-full "
                         src={user?.photoURL}
                         alt={user.displayName}
@@ -149,7 +161,7 @@ const Navber = () => {
                   </button>
 
                   <ul
-                    className="dropdown menu w-52 rounded-box bg-base-100 shadow-sm"
+                    className="dropdown menu w-60 rounded-box bg-base-100 shadow-sm"
                     popover="auto"
                     id="popover-1"
                     style={
@@ -173,6 +185,7 @@ const Navber = () => {
                       defaultChecked
                       className="toggle text-right"
                     />
+                    <li className="">{format(new Date(), "dd/mm/yyy")}</li>
                   </ul>
                 </div>
               </>
