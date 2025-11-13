@@ -7,7 +7,7 @@ const Footer = () => {
     <div className="py-8 mt-5 text-white bg-blue-950">
       <MyContainer>
         {/* top div  */}
-        <div className="flex border-b pb-3 items-center justify-between">
+        <div className="md:flex space-y-1 border-b pb-3 items-center justify-between">
           {/* left  */}
           <div className="flex items-center">
             <img
@@ -27,7 +27,7 @@ const Footer = () => {
         </div>
 
         {/* middle div  */}
-        <div className="md:flex justify-between py-4 border-b ">
+        <div className="md:flex space-y-6 justify-between py-4 border-b ">
           <div>
             <h1 className="text-2xl border-b">Pages</h1>
             <ul className="text-gray-300 mt-2 ">

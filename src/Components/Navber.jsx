@@ -103,7 +103,7 @@ const Navber = () => {
             </div>
             <ul
               tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-blue-950/70 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               {links}
             </ul>
@@ -134,19 +134,20 @@ const Navber = () => {
               
                 <div id="hoverImg"  data-tooltip-id="hoverImg" data-tooltip-content={user?.displayName} className="flex gap-1">
                   <button
-                    className=""
+                    className="relative"
                     popoverTarget="popover-1"
                     style={
                       { anchorName: "--anchor-1" } /* as React.CSSProperties */
                     }
                   >
-                    <Tooltip id="Asif" />
+                    <Tooltip place="right" id="Asif" />
                     {user.photoURL ? (
                       
                       <img
                          data-tooltip-id="Asif"
                          data-tooltip-content={user?.displayName}
-                        className="h-10 w-10 rounded-full "
+                         
+                        className="h-10 w-10 z-10 rounded-full "
                         src={user?.photoURL}
                         alt={user.displayName}
                       />
@@ -161,7 +162,7 @@ const Navber = () => {
                   </button>
 
                   <ul
-                    className="dropdown menu w-60 rounded-box bg-base-100 shadow-sm"
+                    className="absolute z-10 top-1 -left-30 dropdown menu w-40 rounded-box bg-base-100 shadow-sm"
                     popover="auto"
                     id="popover-1"
                     style={
