@@ -46,7 +46,7 @@ const MyBooks = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/delete-book/${id}`).then((data) => {
-          console.log(data);
+          // console.log(data);
           if (data.data.deletedCount) {
             const filter = books.filter((book) => book._id !== id);
             setMyBooks(filter);
@@ -64,7 +64,7 @@ const MyBooks = () => {
   const handleOpenModalAndFetch = (id) => {
     modalRef.current.showModal();
     axiosSecure.get(`/bookDetails/${id}`).then((data) => {
-      console.log(data.data);
+      // console.log(data.data);
       setUpdateBook(data.data);
     });
   };
@@ -91,22 +91,22 @@ const MyBooks = () => {
       userEmail,
       userName,
     };
-    console.log({
-      title,
-      author,
-      genre,
-      rating,
-      coverImage,
-      summary,
-      userEmail,
-      userName,
-    });
+    // console.log({
+    //   title,
+    //   author,
+    //   genre,
+    //   rating,
+    //   coverImage,
+    //   summary,
+    //   userEmail,
+    //   userName,
+    // });
 
     axiosSecure
       .patch(`/update-Book/${updateBook._id}`, forUpdate)
       .then((data) => {
         if (data.data.modifiedCount) {
-          console.log(data.data);
+          // console.log(data.data);
           modalRef.current.close();
           toast.success("Book updated");
           setRefresh(!true);

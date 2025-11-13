@@ -19,7 +19,7 @@ import { format } from "date-fns";
 const Navber = () => {
   const { user, signOutUser, setLoading, loading } = useAuth();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-  console.log(user);
+  // console.log(user);
 
   
 

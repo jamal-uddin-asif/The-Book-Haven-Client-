@@ -43,7 +43,7 @@ const BookDetails = () => {
     };
 
     axiosSecure.post("/comments", forPostComment).then((data) => {
-      console.log(data);
+      // console.log(data);
       setRefresh(!true)
       e.target.reset()
     });

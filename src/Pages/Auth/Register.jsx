@@ -40,7 +40,7 @@ const passRegEx = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
         displayName: name,
         photoURL: photo
       }).then(()=>{
-        console.log("Profile updated")
+        // console.log("Profile updated")
       })
 
       setLoading(false)
@@ -72,7 +72,7 @@ const passRegEx = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
       window.scrollTo(0, 0);
     }, []);
 
-    
+
   return (
     <div className="flex p-2 bg-[#FED3D1]  justify-center items-center  min-h-screen">
      
