@@ -10,6 +10,7 @@ import { TbLogout } from "react-icons/tb";
 import { IoIosLogIn } from "react-icons/io";
 import { BarLoader } from "react-spinners";
 
+
 const Navber = () => {
   const { user, signOutUser, setLoading, loading } = useAuth();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
@@ -118,6 +119,7 @@ const Navber = () => {
           </ul>
         </div>
         <div className="navbar-end">
+          
           <div className="space-x-3">
             {user ? (
               <>
@@ -130,11 +132,13 @@ const Navber = () => {
                     }
                   >
                     {user.photoURL ? (
+                      
                       <img
                         className="h-10 w-10 rounded-full "
                         src={user?.photoURL}
                         alt={user.displayName}
                       />
+                      
                     ) : (
                       <img
                         className="h-10 rounded-full "
