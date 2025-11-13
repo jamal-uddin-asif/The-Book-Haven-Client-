@@ -51,7 +51,7 @@ const Home = () => {
           <div  className="relative  banner my-5 rounded-xl text-white">
             <div  className="  md:flex py-15  items-center justify-center text-center ">
               <div data-aos="fade-up" className="space-y-4">
-                <h1 className="tracking-wide text-2xl  font-bold  md:text-3xl  lg:text-5xl my-heading ">
+                <h1 className="tracking-wide text-3xl  font-bold  md:text-4xl  lg:text-5xl my-heading ">
                   Your Personal Library, Reimagined
                 </h1>
                 <div className="my-heading rounded-full tracking-wider mb-4  ">
