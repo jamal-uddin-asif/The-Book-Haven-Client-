@@ -7,8 +7,6 @@
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
-/* .my-heading {
-} */
 
 * {
   font-family: "Mona Sans", sans-serif;
@@ -16,5 +14,12 @@
 /* font-family: "Roboto", sans-serif; */
 
 a.active{
-  @apply bg-white rounded-full font-bold
+  @apply bg-white rounded-full font-bold text-blue-950
+}
+
+.banner {
+  background-image: url('./assets/library.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 400px;
 }

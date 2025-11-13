@@ -58,14 +58,14 @@ const BookDetails = () => {
     <div>
       <MyContainer>
         <div className="md:flex py-10  bg-blue-950/80 rounded-2xl mt-5 text-white">
-          <div className="flex-1 px-2">
+          <div data-aos="fade-up" className="flex-1 px-2">
             <img
               className="max-h-[400px] mx-auto"
               src={book.coverImage}
               alt=""
             />
           </div>
-          <div className="flex-1 max-h-screen overflow-scroll p-3">
+          <div data-aos="fade-left" className="flex-1 max-h-screen overflow-scroll p-3">
             <div className="border-b pb-3">
               <h1 className="font-bold  text-3xl">{book.title}</h1>
               <h3>Author: {book.author}</h3>
@@ -91,9 +91,10 @@ const BookDetails = () => {
             <div className="flex space-y-3 flex-col">
               <textarea
                 name="comment"
+                placeholder="Comment here...."
                 cols={25}
                 rows={4}
-                className="border bg-gray-200 p-2 border-blue-800 rounded-xl"
+                className="border  p-2 border-blue-800 rounded-xl"
               ></textarea>
               <button className=" p-2 max-w-27 mx-auto rounded-sm  bg-blue-950 text-[#FED3D1] shadow-xl  opacity-65 hover:bg-green-500">
                 Comment

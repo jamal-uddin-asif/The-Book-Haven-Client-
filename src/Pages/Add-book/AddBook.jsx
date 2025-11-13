@@ -139,7 +139,7 @@ const AddBook = () => {
                     id=""
                   ></textarea>
 
-                  <button className="text-[#5d806a] rounded-full text-xl btn bg-linear-to-br from-[#FED3D1] to-[#a58c8b] mt-4">
+                  <button className="text-white p-2 my-2 rounded-sm  bg-blue-950 opacity-65 text-xl  mt-4">
                     Add Book
                   </button>
                 </fieldset>

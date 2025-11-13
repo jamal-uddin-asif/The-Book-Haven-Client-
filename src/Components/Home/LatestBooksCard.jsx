@@ -11,7 +11,7 @@ const LatestBooksCard = ({ book }) => {
           src={book.coverImage}
           alt=""
         />
-        <h1 className="pl-3 my-heading font-bold text-xl">{book.title}</h1>
+        <h1 className="pl-3 my-heading font-bold text-xl line-clamp-2">{book.title}</h1>
       </div>
 
       <div className="flex-1  space-y-2 pl-3 pt-2">

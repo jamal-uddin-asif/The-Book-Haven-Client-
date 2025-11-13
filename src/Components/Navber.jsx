@@ -47,13 +47,13 @@ const Navber = () => {
 
   const links = (
     <>
-      <li>
+      <li className="text-white">
         <NavLink to={"/"}>
           <FaHouseChimney />
           Home
         </NavLink>
       </li>
-      <li>
+      <li className="text-white">
         <NavLink to={"/all-books"}>
           <SiWikibooks />
           All Books
@@ -61,13 +61,13 @@ const Navber = () => {
       </li>
       {user && (
         <>
-          <li>
+          <li className="text-white">
             <NavLink to={"/add-book"}>
               <BiSolidBookAdd />
               Add Books
             </NavLink>
           </li>
-          <li>
+          <li className="text-white">
             <NavLink to={"/my-books"}>
               <FaBookOpenReader />
               My Books
@@ -78,7 +78,7 @@ const Navber = () => {
     </>
   );
   return (
-    <div className=" bg-[#FED3D1] ">
+    <div className=" bg-blue-950/70">
       
       {/* <MyContainer> */}
       <div className="md:max-w-11/12 mx-auto navbar   ">
@@ -116,8 +116,8 @@ const Navber = () => {
               src="https://img.icons8.com/plasticine/100/book.png"
               alt=""
             />
-            <div className="text-blue-900">
-              <span className="text-2xl text-emerald-800">H</span>aven
+            <div className="text-gray-300">
+              <span className="text-2xl text-emerald-400">H</span>aven
             </div>
           </a>
         </div>

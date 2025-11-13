@@ -22,7 +22,7 @@ const AllBooks = () => {
     .then(data=>{
         setBooks(data.data)
     })
-  }, [sort]);
+  }, [sort, axiosSecure]);
 
   useEffect(() => {
     axiosSecure.get("/all-books").then((data) => {
@@ -38,7 +38,7 @@ const AllBooks = () => {
     },[])
 
   if (loading) {
-    return <div className="bg-[#FED3D1] flex justify-center items-center min-h-screen">
+    return <div className="flex justify-center items-center min-h-screen">
          <SyncLoader/>
     </div>;
   }
@@ -82,7 +82,7 @@ const AllBooks = () => {
                           </div>
                         </div>
                         <div className="md:block hidden">
-                          <div className="font-bold">{book.title}</div>
+                          <div className="font-bold ">{book.title}</div>
                           <div className="text-sm opacity-50 badge badge-info">
                             {book.author}
                           </div>
@@ -90,7 +90,7 @@ const AllBooks = () => {
                       </div>
                     </td>
 
-                    <td className="hidden md:block">{book.genre}</td>
+                    <td className="hidden md:block font-semibold">{book.genre}</td>
                     <td>
                       <div className="badge badge-warning">
                         {book?.rating}
