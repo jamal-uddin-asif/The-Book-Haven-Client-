@@ -43,6 +43,7 @@ const Home = () => {
   
   return (
     <div className="">
+      <title>Home | The Book Haven</title>
       {/* banner  */}
 
       <div className="">

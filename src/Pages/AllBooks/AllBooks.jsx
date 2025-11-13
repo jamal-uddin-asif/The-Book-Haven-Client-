@@ -45,6 +45,7 @@ const AllBooks = () => {
 
   return (
     <div className="">
+      <title>All Book | The Book Haven</title>
       <MyContainer>
         <div className="border-b mb-4 my-heading py-4 text-xl">
           <span>Sort by rating</span> {/* <form > */}
@@ -81,9 +82,9 @@ const AllBooks = () => {
                             <img src={book.coverImage} alt={book.title} />
                           </div>
                         </div>
-                        <div className="md:block hidden">
+                        <div className="">
                           <div className="font-bold ">{book.title}</div>
-                          <div className="text-sm opacity-50 badge badge-info">
+                          <div className="text-sm hidden md:block opacity-50 badge badge-info">
                             {book.author}
                           </div>
                         </div>
@@ -91,13 +92,13 @@ const AllBooks = () => {
                     </td>
 
                     <td className="hidden md:block font-semibold">{book.genre}</td>
-                    <td>
+                    <td className="w-10">
                       <div className="badge badge-warning">
                         {book?.rating}
                         <FaStar color="gold" />
                       </div>
                     </td>
-                    <td>
+                    <td className="w-10">
                       <Link
                         to={`/book-details/${book._id}`}
                         className="p-2.5 my-2 rounded-sm  bg-blue-950 text-[#FED3D1] opacity-65 hover:bg-green-500"

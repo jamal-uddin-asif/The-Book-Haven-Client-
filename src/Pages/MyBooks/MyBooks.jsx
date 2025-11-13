@@ -126,6 +126,7 @@ const MyBooks = () => {
 
   return (
     <div>
+      <title>My Books | The Book Haven</title>
       <MyContainer>
         <div data-aos="fade-up" className="my-5 rounded-2xl bg-blue-950 min-h-screen">
           <div>
@@ -157,18 +158,18 @@ const MyBooks = () => {
                               <img src={book.coverImage} alt={book.title} />
                             </div>
                           </div>
-                          <div className="md:block hidden">
+                          <div className="">
                             <div className="font-bold">{book.title}</div>
-                            <div className="text-sm opacity-50 badge badge-info">
+                            <div className="hidden md:block text-sm opacity-50 badge badge-info">
                               {book.author}
                             </div>
                           </div>
                         </div>
                       </td>
 
-                      <td className="hidden md:block">{book.genre}</td>
+                      <td className="w-10 font-semibold hidden md:block">{book.genre}</td>
                       <td>
-                        <div className="badge badge-warning">
+                        <div className="w-10 badge badge-warning">
                           {book?.rating}
                           <FaStar color="gold" />
                         </div>

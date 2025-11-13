@@ -5,6 +5,7 @@ import { FaFacebook, FaInstagram, FaLinkedin, FaWhatsapp, FaXTwitter, FaYoutube 
 const Footer = () => {
   return (
     <div className="py-8 mt-5 text-white bg-blue-950">
+        <title>Register | The Book Haven</title>
       <MyContainer>
         {/* top div  */}
         <div className="md:flex space-y-1 border-b pb-3 items-center justify-between">

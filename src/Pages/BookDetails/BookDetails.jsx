@@ -56,6 +56,7 @@ const BookDetails = () => {
 
   return (
     <div>
+      <title>Book Details | The Book Haven</title>
       <MyContainer>
         <div className="md:flex py-10  bg-blue-950/80 rounded-2xl mt-5 text-white">
           <div data-aos="fade-up" className="flex-1 px-2">

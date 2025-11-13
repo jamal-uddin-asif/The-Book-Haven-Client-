@@ -186,7 +186,7 @@ const Navber = () => {
                       defaultChecked
                       className="toggle text-right"
                     />
-                    <li className="">{format(new Date(), "dd/mm/yyy")}</li>
+                    <li className="">{format(new Date(), "dd/MM/YYY")}</li>
                   </ul>
                 </div>
               </>
