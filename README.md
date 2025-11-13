@@ -1,6 +1,6 @@
 # Project Name: The Book Haven
 
-- Live URL: 
+- Live URL: https://the-book-haven12.netlify.app/
 
 ## Feature of this website
 
@@ -10,4 +10,3 @@
 - update book
 - Delete book
 - Comment in any book
-
