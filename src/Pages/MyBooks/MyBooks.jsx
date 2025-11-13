@@ -8,6 +8,9 @@ import { SyncLoader } from "react-spinners";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
+import Aos from "aos";
+import "aos/dist/aos.css";
+
 const MyBooks = () => {
   const { user } = useAuth();
   const modalRef = useRef("");
@@ -17,6 +20,12 @@ const MyBooks = () => {
   const [refresh, setRefresh] = useState(true);
 
   const axiosSecure = useAxiosSecure();
+
+  // Animaton
+
+  useEffect(() => {
+    Aos.init();
+  }, []);
 
   useEffect(() => {
     axiosSecure.get(`/all-books?email=${user?.email}`).then((data) => {
@@ -118,7 +127,7 @@ const MyBooks = () => {
   return (
     <div>
       <MyContainer>
-        <div className="my-5 rounded-2xl bg-blue-950 min-h-screen">
+        <div data-aos="fade-up" className="my-5 rounded-2xl bg-blue-950 min-h-screen">
           <div>
             <div className="overflow-x-auto rounded-xl">
               <table className="table ">

@@ -9,10 +9,14 @@ import { FaBookOpenReader } from "react-icons/fa6";
 import { MdAutoDelete } from "react-icons/md";
 import { TiEdit } from "react-icons/ti";
 
+import Aos from "aos";
+import 'aos/dist/aos.css'
+
 const Home = () => {
   const axiosSecure = useAxiosSecure();
   const [latestBooks, setLatestBooks] = useState([]);
   const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     axiosSecure.get("/latest-books").then((data) => {
@@ -21,16 +25,26 @@ const Home = () => {
     });
   });
 
+
+  // Animaton 
+  
+  useEffect(()=>{
+    Aos.init();
+  },[])
+
+
+
+  
   return (
-    <div className="bg-[#FED3D1]">
+    <div className="">
       {/* banner  */}
 
       <div className="">
         <MyContainer>
-          <div className="relative  ">
-            <div className="  md:flex py-15  items-center justify-center text-center ">
-              <div className="space-y-4">
-                <h1 className="animate-bounce text-2xl text-green-800 font-bold  md:text-3xl  lg:text-5xl my-heading ">
+          <div  className="relative  ">
+            <div  className="  md:flex py-15  items-center justify-center text-center ">
+              <div data-aos="fade-right" className="space-y-4">
+                <h1 className=" text-2xl  font-bold  md:text-3xl  lg:text-5xl my-heading ">
                   Your Personal Library, Reimagined
                 </h1>
                 <div className="my-heading rounded-full text-yellow-700 mb-4  ">
@@ -41,7 +55,8 @@ const Home = () => {
                   </p>
                 </div>
               </div>
-              <div>
+              <div data-aos="fade-left">
+               
                 <img className="mx-auto " src={books} alt="" />
               </div>
             </div>
@@ -49,13 +64,13 @@ const Home = () => {
             <div className="absolute bottom-5 left-5 space-x-2 ">
               <Link
                 to={"/all-books"}
-                className=" p-2 rounded-sm  bg-blue-950 text-[#FED3D1] shadow-xl shadow-blue-950 opacity-65 hover:bg-green-500"
+                className=" p-2 rounded-sm  bg-blue-950 text-white shadow-xl shadow-blue-950 opacity-65 hover:bg-green-500"
               >
                 All Books
               </Link>
               <Link
                 to={"/add-book"}
-                className=" p-2 rounded-sm  bg-blue-950 text-[#FED3D1] shadow-xl shadow-blue-950 hover:bg-green-500 opacity-60 shadow-xl"
+                className=" p-2 rounded-sm  bg-blue-950 text-white shadow-xl shadow-blue-950 hover:bg-green-500 opacity-60 "
               >
                 Create Book
               </Link>
@@ -63,12 +78,34 @@ const Home = () => {
           </div>
 
           <div className="">
-            <h1 className="border-b mb-4 my-heading py-4 text-2xl">Feature of this web</h1>
+            <h1 className="border-b mb-4 my-heading py-4 text-2xl">
+              Feature of this web
+            </h1>
             <div className="sm:flex space-y-4 text-center justify-center gap-7 py-6">
-              <div className="bg-linear-to-br from-green-400 to-green-800 p-6 rounded-2xl hover:scale-105 transition ease-in-out text-white"><div className="flex justify-center"><FaBookOpenReader size={30}/></div>Read book</div>
-              <div className="bg-linear-to-br from-orange-400 to-orange-700 p-6 rounded-2xl hover:scale-105 transition ease-in-out text-white"><div className="flex justify-center"><BiSolidBookAdd size={30}/></div>Add book</div>
-              <div className="bg-linear-to-br from-yellow-300 to-yellow-600 p-6 rounded-2xl hover:scale-105 transition ease-in-out text-white"><div className="flex justify-center"><TiEdit size={30} /></div>Edit book</div>
-              <div className="bg-linear-to-br from-red-500 to-red-800 p-6 rounded-2xl hover:scale-105 transition ease-in-out text-white"><div className="flex justify-center"><MdAutoDelete size={30} /></div>Delete book</div>
+              <div className="bg-linear-to-br from-green-400 to-green-800 p-6 rounded-2xl hover:scale-105 transition ease-in-out text-white">
+                <div className="flex justify-center">
+                  <FaBookOpenReader size={30} />
+                </div>
+                Read book
+              </div>
+              <div className="bg-linear-to-br from-orange-400 to-orange-700 p-6 rounded-2xl hover:scale-105 transition ease-in-out text-white">
+                <div className="flex justify-center">
+                  <BiSolidBookAdd size={30} />
+                </div>
+                Add book
+              </div>
+              <div className="bg-linear-to-br from-yellow-300 to-yellow-600 p-6 rounded-2xl hover:scale-105 transition ease-in-out text-white">
+                <div className="flex justify-center">
+                  <TiEdit size={30} />
+                </div>
+                Edit book
+              </div>
+              <div className="bg-linear-to-br from-red-500 to-red-800 p-6 rounded-2xl hover:scale-105 transition ease-in-out text-white">
+                <div className="flex justify-center">
+                  <MdAutoDelete size={30} />
+                </div>
+                Delete book
+              </div>
             </div>
           </div>
 
@@ -88,7 +125,9 @@ const Home = () => {
             </div>
             {/* book of the week  */}
             <div className="col-span-4 p-3 bg-blue-950 rounded-2xl">
-              <h1 className="text-white text-2xl pt-3 border-b mb-3">Book of the Week</h1>
+              <h1 className="text-white text-2xl pt-3 border-b mb-3">
+                Book of the Week
+              </h1>
               <div>
                 <img src="https://i.ibb.co.com/j970FVrw/positive.webp" alt="" />
               </div>

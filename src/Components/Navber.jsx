@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router";
 import MyContainer from "./MyContainer/MyContainer";
 import { useAuth } from "../Hooks/useAuth";
@@ -8,9 +8,24 @@ import { SiWikibooks } from "react-icons/si";
 import { BiSolidBookAdd } from "react-icons/bi";
 import { TbLogout } from "react-icons/tb";
 import { IoIosLogIn } from "react-icons/io";
+import { BarLoader } from "react-spinners";
 
 const Navber = () => {
-  const { user, signOutUser, setLoading } = useAuth();
+  const { user, signOutUser, setLoading, loading } = useAuth();
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  console.log(user);
+
+  // Theme toggle
+
+  useEffect(() => {
+    const html = document.querySelector("html");
+    html.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+  const handleThemeToggle = (checked) => {
+    setTheme(checked ? "dark" : "light");
+  };
+
   const handleSignOut = () => {
     signOutUser()
       .then(() => {
@@ -36,18 +51,22 @@ const Navber = () => {
           All Books
         </NavLink>
       </li>
-      <li>
-        <NavLink to={"/add-book"}>
-          <BiSolidBookAdd />
-          Add Books
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to={"/my-books"}>
-          <FaBookOpenReader />
-          My Books
-        </NavLink>
-      </li>
+      {user && (
+        <>
+          <li>
+            <NavLink to={"/add-book"}>
+              <BiSolidBookAdd />
+              Add Books
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={"/my-books"}>
+              <FaBookOpenReader />
+              My Books
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
   return (
@@ -80,10 +99,17 @@ const Navber = () => {
               {links}
             </ul>
           </div>
-          <a className="my-heading font-bold md:text-xl">
-            <span className="text-green-800">The </span>
-            <span className="text-amber-600">Book </span>
-            <span className="text-blue-600">Haven</span>
+          <a className="my-heading flex items-center font-bold md:text-xl">
+            {/* <span className="text-green-800">The </span>
+            <span className="text-amber-600">Book </span> */}
+            <img
+              className="w-10 h-10"
+              src="https://img.icons8.com/plasticine/100/book.png"
+              alt=""
+            />
+            <div className="text-blue-900">
+              <span className="text-2xl text-emerald-800">H</span>aven
+            </div>
           </a>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -96,15 +122,58 @@ const Navber = () => {
             {user ? (
               <>
                 <div className="flex gap-1">
-                  {user.photoURL ? <img className="h-10 rounded-full " src={user?.photoURL} alt="" /> : <img className="h-10 rounded-full " src='https://img.icons8.com/ios/50/user-male-circle--v1.png' alt="" />}
-                <button
-                  onClick={handleSignOut}
-                  className="p-2 rounded-sm   bg-blue-950 text-[#FED3D1] shadow-sm shadow-blue-950 opacity-65 hover:bg-green-500  flex items-center space-x-1.5"
-                >
-                  <span>Logout</span> <TbLogout />
-                </button>
+                  <button
+                    className=""
+                    popoverTarget="popover-1"
+                    style={
+                      { anchorName: "--anchor-1" } /* as React.CSSProperties */
+                    }
+                  >
+                    {user.photoURL ? (
+                      <img
+                        className="h-10 w-10 rounded-full "
+                        src={user?.photoURL}
+                        alt={user.displayName}
+                      />
+                    ) : (
+                      <img
+                        className="h-10 rounded-full "
+                        src="https://img.icons8.com/ios/50/user-male-circle--v1.png"
+                        alt=""
+                      />
+                    )}
+                  </button>
+
+                  <ul
+                    className="dropdown menu w-52 rounded-box bg-base-100 shadow-sm"
+                    popover="auto"
+                    id="popover-1"
+                    style={
+                      {
+                        positionAnchor: "--anchor-1",
+                      } /* as React.CSSProperties */
+                    }
+                  >
+                    <li className="mb-2">
+                      <button
+                        onClick={handleSignOut}
+                        className="p-2 rounded-sm   bg-blue-950 text-[#FED3D1] shadow-sm shadow-blue-950 opacity-65 hover:bg-green-500  flex items-center space-x-1.5"
+                      >
+                        <span>Logout</span> <TbLogout />
+                      </button>
+                    </li>
+                    <label className="text-neutral-600 mr-1">Theme</label>
+                    <input
+                      onChange={(e) => handleThemeToggle(e.target.checked)}
+                      type="checkbox"
+                      defaultChecked
+                      className="toggle text-right"
+                    />
+                  </ul>
                 </div>
               </>
+            ) : loading ? (
+              <BarLoader />
             ) : (
               <>
                 <Link

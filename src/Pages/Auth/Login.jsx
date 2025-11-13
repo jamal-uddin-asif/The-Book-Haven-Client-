@@ -1,11 +1,13 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { useAuth } from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 
 const Login = () => {
   const { signInUser, user, googleSignIn, setLoading } = useAuth();
-  console.log(user)
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state || "/";
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -14,31 +16,29 @@ const Login = () => {
     const password = e.target.password.value;
 
     signInUser(email, password)
-    .then(result=>{
-      // console.log(result)
-      setLoading(false)
-      toast.success('SignIn successful')
-
-    })
-    .catch(err=>{
-      console.log(err)
-    })
+      .then((result) => {
+        // console.log(result)
+        setLoading(false);
+        navigate(from);
+        toast.success("SignIn successful");
+      })
+      .catch((err) => {
+        toast.error(err.code);
+      });
   };
 
-  const handleGoogleSignIn = () =>{
+  const handleGoogleSignIn = () => {
     googleSignIn()
-    .then(result=>{
-      // console.log(result)
-      setLoading(false)
-      toast.success("SignIn successful")
-
-    })
-    .catch(err=>{
-      console.log(err)
-    })
-
-
-  }
+      .then((result) => {
+        // console.log(result)
+        setLoading(false);
+        navigate(from);
+        toast.success("SignIn successful");
+      })
+      .catch((err) => {
+        toast.error(err.code);
+      });
+  };
   return (
     <div className="flex p-2 bg-[#FED3D1]  justify-center items-center  min-h-screen">
       <div className=" card  bg-white/60 w-full max-w-sm shrink-0 ">
@@ -70,7 +70,11 @@ const Login = () => {
               Login
             </button>
             {/* Google */}
-            <button onClick={handleGoogleSignIn} type="button" className="btn rounded-full bg-white/40 text-black border-[#e5e5e5]">
+            <button
+              onClick={handleGoogleSignIn}
+              type="button"
+              className="btn rounded-full bg-white/40 text-black border-[#e5e5e5]"
+            >
               <svg
                 aria-label="Google logo"
                 width="25"

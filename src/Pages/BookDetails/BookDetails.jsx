@@ -2,26 +2,64 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useAxiosSecure } from "../../Hooks/useAxiosSecure";
 import MyContainer from "../../Components/MyContainer/MyContainer";
+import { useAuth } from "../../Hooks/useAuth";
 
 const BookDetails = () => {
   const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
   const { id } = useParams();
   const [book, setBook] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log(book);
+  const [comments, setComments] = useState([]);
+  const [refresh, setRefresh] = useState(true)
+
   useEffect(() => {
     axiosSecure.get(`/bookDetails/${id}`).then((data) => {
       setBook(data.data);
       setLoading(false);
     });
-  }, [id]);
+  }, [id, axiosSecure, refresh]);
+
+  // comment fetching
+  useEffect(() => {
+    axiosSecure.get(`/comments/${book?._id}`).then((data) => {
+      setComments(data.data);
+    });
+  }, [axiosSecure, book]);
+
+  const handleComment = (e) => {
+    e.preventDefault();
+    const comment = e.target.comment.value;
+    const displayName = user.displayName;
+    const photoURL =
+      user.photoURL || "https://img.icons8.com/ios/50/user-male-circle--v1.png";
+
+    const forPostComment = {
+      displayName,
+      photoURL,
+      comment,
+      book: book?._id,
+      created_at: new Date().toLocaleDateString(),
+    };
+
+    axiosSecure.post("/comments", forPostComment).then((data) => {
+      console.log(data);
+      setRefresh(!true)
+      e.target.reset()
+    });
+
+  };
 
   return (
     <div>
       <MyContainer>
         <div className="md:flex py-10  bg-blue-950/80 rounded-2xl mt-5 text-white">
           <div className="flex-1 px-2">
-            <img className="max-h-[400px] mx-auto" src={book.coverImage} alt="" />
+            <img
+              className="max-h-[400px] mx-auto"
+              src={book.coverImage}
+              alt=""
+            />
           </div>
           <div className="flex-1 max-h-screen overflow-scroll p-3">
             <div className="border-b pb-3">
@@ -30,21 +68,53 @@ const BookDetails = () => {
             </div>
 
             <div className="bg-white/10">
-                <h1 >Genre: {book.genre}</h1>
-                <p>Create by: {book.userEmail}</p>
-                <div className="bg-yellow-500 text-blue-800 inline px-3 rounded-sm">Rating: {book.rating}</div>
-                <div>
-                    summary: {book.summary}
-                </div>
-                
+              <h1>Genre: {book.genre}</h1>
+              <p>Create by: {book.userEmail}</p>
+              <div className="bg-yellow-500 text-blue-800 inline px-3 rounded-sm">
+                Rating: {book.rating}
+              </div>
+              <div>summary: {book.summary}</div>
             </div>
           </div>
         </div>
 
         {/* comments  */}
-        <div>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam in cumque nemo, explicabo est dignissimos rerum harum illo quidem repellendus accusamus voluptate eius repudiandae reiciendis soluta exercitationem ducimus placeat voluptatem animi, eveniet vero? Voluptatum debitis quas illum dolores facilis impedit asperiores distinctio ullam amet aut, quam facere unde explicabo, ducimus animi maiores doloribus quod incidunt enim voluptatibus. Sapiente, facilis qui corrupti quos dolores fuga perferendis vero aut corporis, eum ipsum dolorem reprehenderit debitis iure enim possimus consectetur, error non atque? Temporibus, neque architecto laborum rem magni saepe sunt vel labore quidem excepturi dignissimos eveniet! Aut deserunt repellendus sapiente quis, alias obcaecati in harum magnam impedit quo nesciunt quidem pariatur exercitationem eum consectetur perspiciatis soluta dolores eos quod facere voluptatem aliquam, ullam nisi. Sit, necessitatibus adipisci at ducimus cupiditate excepturi soluta molestias tempora minima sequi optio natus maxime est reiciendis sunt eaque nostrum quo similique corrupti debitis culpa neque? Deserunt quaerat nulla tempore inventore laboriosam maiores harum! Cumque non id earum? Sapiente accusamus illum ducimus qui alias eligendi quis, voluptates vitae quia iste culpa nobis, minus, nesciunt enim nihil reiciendis at magnam ullam totam nulla deserunt dolor ad voluptate! Hic ducimus necessitatibus id repellat, consectetur temporibus. Similique vitae deserunt cum asperiores?
+        <div className="my-5 bg-linear-to-br from-fuchsia-400 to-gray-800 rounded-2xl p-2">
+          <form onSubmit={handleComment}>
+            <h1 className="border-b mb-4 my-heading py-4 text-2xl border-blue-700 text-gray-200 text-center">
+              Comment about this book
+            </h1>
+            <div className="flex space-y-3 flex-col">
+              <textarea
+                name="comment"
+                cols={25}
+                rows={4}
+                className="border bg-gray-200 p-2 border-blue-800 rounded-xl"
+              ></textarea>
+              <button className=" p-2 max-w-27 mx-auto rounded-sm  bg-blue-950 text-[#FED3D1] shadow-xl  opacity-65 hover:bg-green-500">
+                Comment
+              </button>
+            </div>
+          </form>
+
         </div>
+          <div className="space-y-5 my-5 bg-blue-950 rounded-xl text-gray-300 p-3">
+            {comments?.map((comment) => (
+              <div>
+                <div className="flex items-center gap-2 ">
+                  <div className="border-2 w-10 rounded-full">
+                    <img className="rounded-full" src={comment.photoURL} alt='' />
+                  </div>
+                  <h1 className="text-sm font-bold ">{comment.displayName}</h1>
+                </div>
+
+                <div className="text-sm ">
+                  <p className="text-sm mb-2">{comment.created_at}</p>
+                  <div>{comment.comment}</div>
+                </div>
+              </div>
+            ))}
+          </div>
       </MyContainer>
     </div>
   );

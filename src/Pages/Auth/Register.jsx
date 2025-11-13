@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useAuth } from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
+import { updateProfile } from "firebase/auth";
+import { auth } from "../../Firebase/Firebase.config";
 
 const Register = () => {
   const {createUser, googleSignIn, setLoading} = useAuth()
 
   const [passErr , setPassErr] = useState('')
+  const navigate = useNavigate()
 
 const passRegEx = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 
@@ -21,7 +24,7 @@ const passRegEx = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
     const email = e.target.email.value;
     const password = e.target.password.value;
     
-    console.log({name, photo, email, password})
+  
     
     if(!passRegEx.test(password)){
       // toast.error('Password not valid')
@@ -32,11 +35,20 @@ const passRegEx = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
     createUser(email, password)
     .then(result=>{
       // console.log(result)
+      
+      updateProfile(auth.currentUser, {
+        displayName: name,
+        photoURL: photo
+      }).then(()=>{
+        console.log("Profile updated")
+      })
+
       setLoading(false)
       toast.success("Registration successful")
+      navigate('/')
     })
     .catch(err=>{
-      console.log(err)
+      toast.error(err.code)
     })
   }
 
@@ -45,10 +57,11 @@ const passRegEx = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
     .then(result=>{
       // console.log(result)
       setLoading(false)
+      navigate('/')
       toast.success("Signin successful")
     })
     .catch(err=>{
-      console.log(err)
+      toast.error(err.code)
     })
 
 

@@ -6,6 +6,9 @@ import { Link } from "react-router";
 import { FaStar } from "react-icons/fa6";
 import { SyncLoader } from "react-spinners";
 
+import Aos from "aos";
+import 'aos/dist/aos.css'
+
 const AllBooks = () => {
   const [books, setBooks] = useState([]);
 
@@ -28,6 +31,12 @@ const AllBooks = () => {
     });
   }, [axiosSecure]);
 
+    // Animaton 
+    
+    useEffect(()=>{
+      Aos.init();
+    },[])
+
   if (loading) {
     return <div className="bg-[#FED3D1] flex justify-center items-center min-h-screen">
          <SyncLoader/>
@@ -35,7 +44,7 @@ const AllBooks = () => {
   }
 
   return (
-    <div className="bg-[#FED3D1]">
+    <div className="">
       <MyContainer>
         <div className="border-b mb-4 my-heading py-4 text-xl">
           <span>Sort by rating</span> {/* <form > */}
@@ -50,21 +59,21 @@ const AllBooks = () => {
           </select>
           {/* </form> */}
         </div>
-        <div>
+        <div data-aos="fade-up">
           <div className="overflow-x-auto">
-            <table className="table">
+            <table className="table ">
               {/* head */}
-              <thead>
+              <thead className="bg-red-600">
                 <tr>
-                  <th className="text-blue-900">Book</th>
-                  <th className="text-blue-900 hidden md:block">Genre</th>
-                  <th className="text-blue-900">Rating</th>
-                  <th className="text-blue-900">Details</th>
+                  <th className="text-white">Book</th>
+                  <th className="text-white hidden md:block">Genre</th>
+                  <th className="text-white">Rating</th>
+                  <th className="text-white">Details</th>
                 </tr>
               </thead>
               <tbody>
-                {books?.map((book) => (
-                  <tr className="">
+                {books?.map((book,i) => (
+                  <tr className={i % 2 !== 0? 'bg-cyan-200' : 'bg-cyan-600'}>
                     <td>
                       <div className="flex items-center gap-3">
                         <div className="avatar">

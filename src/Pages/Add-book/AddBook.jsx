@@ -1,69 +1,78 @@
-import React from "react";
+import React, { useEffect } from "react";
 import boy from "../../assets/boy.jpg";
 import MyContainer from "../../Components/MyContainer/MyContainer";
 import { useAuth } from "../../Hooks/useAuth";
 import { useAxiosSecure } from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 
+import Aos from "aos";
+import "aos/dist/aos.css";
+
 const AddBook = () => {
-    const {user} = useAuth()
-    const axiosSecure = useAxiosSecure()
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
 
-    // console.log(user)
+  // console.log(user)
 
-    const handleAddBook = (e) =>{
-        e.preventDefault()
-        const title = e.target.title.value;
-        const author = e.target.author.value;
-        const genre = e.target.genre.value;
-        const rating = e.target.rating.value;
-        const coverImage = e.target.coverImage.value;
-        const summary = e.target.summary.value;
-        const userEmail = user?.email;
-        const userName = user?.displayName;
-        const create_at = new Date
+      // Animaton 
+      
+      useEffect(()=>{
+        Aos.init();
+      },[])
 
-        // console.log({title, author, genre, rating, coverImage, summary, userEmail, userName, create_at})
+  const handleAddBook = (e) => {
+    e.preventDefault();
+    const title = e.target.title.value;
+    const author = e.target.author.value;
+    const genre = e.target.genre.value;
+    const rating = e.target.rating.value;
+    const coverImage = e.target.coverImage.value;
+    const summary = e.target.summary.value;
+    const userEmail = user?.email;
+    const userName = user?.displayName;
+    const create_at = new Date();
 
-        if(!title || !author || !genre || !rating || !coverImage || !summary ){
-            toast.error("Fill the form please")
-            return
-        }
-        const newBook = {
-            title,
-            author, 
-            genre, 
-            rating, 
-            coverImage,
-            userEmail,
-            userName,
-            create_at,
-            summary, 
+    // console.log({title, author, genre, rating, coverImage, summary, userEmail, userName, create_at})
 
-        }
-        
-
-        axiosSecure.post('/books', newBook)
-        .then(data=>{
-            // console.log(data)
-            e.target.reset()
-            toast.success("Book Added")
-        })
-
-
+    if (!title || !author || !genre || !rating || !coverImage || !summary) {
+      toast.error("Fill the form please");
+      return;
     }
+    const newBook = {
+      title,
+      author,
+      genre,
+      rating,
+      coverImage,
+      userEmail,
+      userName,
+      create_at,
+      summary,
+    };
+
+    axiosSecure.post("/books", newBook).then((data) => {
+      // console.log(data)
+      e.target.reset();
+      toast.success("Book Added");
+    });
+  };
+
+  
   return (
     <div className="">
       <MyContainer>
         <div className="my-5 flex justify-around  rounded-2xl bg-blue-950/80 min-h-screen :">
           <div className="md:flex gap-7 p-2   justify-center items-center  min-h-screen">
-            <div className=" card   bg-white/10 w-full max-w-sm shrink-0 ">
-              <h1 className="text-center py-3 text-2xl font-bold text-green-700 my-heading ">
-                Register now
+            <div
+              data-aos="fade-right"
+              className=" card   bg-white/10 w-full max-w-sm shrink-0 "
+            >
+              <h1 className="text-blue-900 text-center py-3 text-2xl font-bold  my-heading ">
+                Add your book
               </h1>
               <form onSubmit={handleAddBook} className="px-5 pb-5 ">
                 <fieldset className="fieldset">
-                  <label className="label">Title</label>
+                  <label className="label text-gray-300">Title</label>
                   <input
                     type="text"
                     name="title"
@@ -71,7 +80,7 @@ const AddBook = () => {
                     placeholder="Title"
                   />
 
-                  <label className="label">Author</label>
+                  <label className="label text-gray-300">Author</label>
                   <input
                     type="text"
                     name="author"
@@ -82,7 +91,7 @@ const AddBook = () => {
                   {/* genre  */}
                   <div className="flex justify-around">
                     <div>
-                      <label className="label">Genre</label>
+                      <label className="label text-gray-300">Genre</label>
                       <select
                         defaultValue="Pick a font"
                         className="select "
@@ -97,7 +106,7 @@ const AddBook = () => {
                     </div>
 
                     <div>
-                      <label className="label">Rating</label>
+                      <label className="label text-gray-300">Rating</label>
                       <select
                         defaultValue="Pick a font"
                         className="select "
@@ -113,7 +122,7 @@ const AddBook = () => {
                     </div>
                   </div>
 
-                  <label className="label">Cover Image</label>
+                  <label className="label text-gray-300">Cover Image</label>
                   <input
                     type="url"
                     name="coverImage"
@@ -121,8 +130,14 @@ const AddBook = () => {
                     placeholder="Image URL"
                   />
 
-                    <label className="label">Summary</label>
-                    <textarea className="bg-white rounded-2xl p-2" name="summary" rows={8} cols={9} id=""></textarea>
+                  <label className="label text-gray-300">Summary</label>
+                  <textarea
+                    className="bg-white rounded-2xl p-2"
+                    name="summary"
+                    rows={8}
+                    cols={9}
+                    id=""
+                  ></textarea>
 
                   <button className="text-[#5d806a] rounded-full text-xl btn bg-linear-to-br from-[#FED3D1] to-[#a58c8b] mt-4">
                     Add Book
@@ -132,7 +147,7 @@ const AddBook = () => {
             </div>
 
             {/* righ side  */}
-            <div className="flex-1">
+            <div  data-aos="fade-left" className="flex-1">
               <img
                 className="max-h-[600px] rounded-2xl md:block hidden"
                 src={boy}
