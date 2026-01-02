@@ -4,7 +4,7 @@ import { FaFacebook, FaInstagram, FaLinkedin, FaWhatsapp, FaXTwitter, FaYoutube 
 
 const Footer = () => {
   return (
-    <div className="py-8 mt-5 text-white bg-blue-950">
+    <div className="py-8 pt-5 text-white bg-blue-950">
         <title>Register | The Book Haven</title>
       <MyContainer>
         {/* top div  */}

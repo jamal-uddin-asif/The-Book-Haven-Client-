@@ -9,6 +9,7 @@ import Home from "../Pages/Home/Home";
 import BookDetails from "../Pages/BookDetails/BookDetails";
 import PageNotFound from "../Pages/PageNotFound";
 import PrivateRoute from "./PrivateRoute";
+import TermsAndConditions from "../Pages/TermsAndConditions/TermsAndConditions";
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
       {
         path: "all-books",
         Component: AllBooks,
+      },
+      {
+        path: "terms",
+        Component: TermsAndConditions,
       },
       {
         path: 'auth/login',

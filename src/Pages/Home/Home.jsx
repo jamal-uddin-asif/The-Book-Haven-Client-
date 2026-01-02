@@ -4,15 +4,12 @@ import { Link } from "react-router";
 import MyContainer from "../../Components/MyContainer/MyContainer";
 import { useAxiosSecure } from "../../Hooks/useAxiosSecure";
 import LatestBooksCard from "../../Components/Home/LatestBooksCard";
-import { BiSolidBookAdd } from "react-icons/bi";
-import { FaBookOpenReader } from "react-icons/fa6";
-import { MdAutoDelete } from "react-icons/md";
-import { TiEdit } from "react-icons/ti";
 import banner from '../../assets/library.jpg'
 
 import Aos from "aos";
 import 'aos/dist/aos.css'
 import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
+import FeatureOfThisWeb from "../../Components/Home/FeatureOfThisWeb/FeatureOfThisWeb";
 
 const Home = () => {
   const axiosSecure = useAxiosSecure();
@@ -42,16 +39,16 @@ const Home = () => {
 
   
   return (
-    <div className="">
+    <div className="bg-base-200 p-2">
       <title>Home | The Book Haven</title>
       {/* banner  */}
 
       <div className="">
         <MyContainer>
-          <div  className="relative  banner my-5 rounded-xl text-white">
+          <div  className="relative  banner my-5 rounded-xl text-white ">
             <div  className="  md:flex py-15  items-center justify-center text-center ">
-              <div data-aos="fade-up" className="space-y-4">
-                <h1 className="tracking-wide text-3xl  font-bold  md:text-4xl  lg:text-5xl my-heading ">
+              <div data-aos="fade-up" className="space-y-4 bg-white/20 rounded-xl p-2">
+                <h1 className="tracking-wide text-3xl  bg-blue-950 p-2 rounded-xl font-bold  md:text-4xl  lg:text-5xl my-heading ">
                   Your Personal Library, Reimagined
                 </h1>
                 <div className="my-heading rounded-full tracking-wider mb-4  ">
@@ -71,13 +68,13 @@ const Home = () => {
             <div data-aos="fade-up" className="flex justify-center items-center bottom-5 left-5 space-x-2 ">
               <Link
                 to={"/all-books"}
-                className=" p-2 rounded-sm  bg-blue-950 text-white shadow-xl shadow-blue-950  hover:bg-green-500"
+                className=" p-2 rounded-sm  bg-blue-950 text-white shadow-xl shadow-blue-900  hover:bg-blue-800"
               >
                 All Books
               </Link>
               <Link
                 to={"/add-book"}
-                className=" p-2 rounded-sm  bg-blue-950 text-white shadow-xl shadow-blue-950 hover:bg-green-500 "
+                className=" p-2 rounded-sm  bg-blue-950 text-white shadow-xl shadow-blue-900 hover:bg-blue-800 "
               >
                 Create Book
               </Link>
@@ -94,7 +91,7 @@ const Home = () => {
               <h1 className="border-b mb-4 my-heading py-4 text-2xl">
                 Latest Books here
               </h1>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
                 {loading ? <div className="col-span-full"><LoadingSpinner></LoadingSpinner></div> : latestBooks?.map((book) => (
                   <LatestBooksCard book={book}></LatestBooksCard>
                 ))}
@@ -123,37 +120,8 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="">
-            <h1 className="border-b mb-4 my-heading py-4 text-2xl">
-              Feature of this web
-            </h1>
-            <div className="sm:flex space-y-4 text-center justify-center gap-7 py-6">
-              <div className="bg-linear-to-br from-green-400 to-green-800 p-6 rounded-2xl hover:scale-105 transition ease-in-out text-white">
-                <div className="flex justify-center">
-                  <FaBookOpenReader size={30} />
-                </div>
-                Read book
-              </div>
-              <div className="bg-linear-to-br from-orange-400 to-orange-700 p-6 rounded-2xl hover:scale-105 transition ease-in-out text-white">
-                <div className="flex justify-center">
-                  <BiSolidBookAdd size={30} />
-                </div>
-                Add book
-              </div>
-              <div className="bg-linear-to-br from-yellow-300 to-yellow-600 p-6 rounded-2xl hover:scale-105 transition ease-in-out text-white">
-                <div className="flex justify-center">
-                  <TiEdit size={30} />
-                </div>
-                Edit book
-              </div>
-              <div className="bg-linear-to-br from-red-500 to-red-800 p-6 rounded-2xl hover:scale-105 transition ease-in-out text-white">
-                <div className="flex justify-center">
-                  <MdAutoDelete size={30} />
-                </div>
-                Delete book
-              </div>
-            </div>
-          </div>
+       <FeatureOfThisWeb/>
+
         </MyContainer>
       </div>
     </div>

@@ -30,7 +30,9 @@ const Navber = () => {
     html.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
+
   const handleThemeToggle = (checked) => {
+    console.log(checked)
     setTheme(checked ? "dark" : "light");
   };
 
@@ -59,6 +61,12 @@ const Navber = () => {
           All Books
         </NavLink>
       </li>
+      <li className="text-white">
+        <NavLink to={"/terms"}>
+          <SiWikibooks />
+         Terms
+        </NavLink>
+      </li>
       {user && (
         <>
           <li className="text-white">
@@ -78,10 +86,11 @@ const Navber = () => {
     </>
   );
   return (
-    <div className=" bg-blue-950/70">
+    <div className=" bg-blue-950 ">
       
-      {/* <MyContainer> */}
-      <div className="md:max-w-11/12 mx-auto navbar   ">
+      
+      <MyContainer>
+      <div className=" navbar  ">
         <div className="navbar-start">
           <div className="dropdown ">
             <div tabIndex={0} role="button" className=" lg:hidden">
@@ -183,7 +192,7 @@ const Navber = () => {
                     <input
                       onChange={(e) => handleThemeToggle(e.target.checked)}
                       type="checkbox"
-                      defaultChecked
+                      checked = {theme === 'dark'}
                       className="toggle text-right"
                     />
                     <li className="">{format(new Date(), "dd/MM/YYY")}</li>
@@ -211,7 +220,7 @@ const Navber = () => {
           </div>
         </div>
       </div>
-      {/* </MyContainer> */}
+      </MyContainer>
     </div>
   );
 };
