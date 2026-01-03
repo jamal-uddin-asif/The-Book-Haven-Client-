@@ -62,16 +62,16 @@ const AddBook = () => {
     <div className="">
       <title>Add Book | The Book Haven</title>
       <MyContainer>
-        <div className="my-5 flex justify-around  rounded-2xl bg-blue-950/80 min-h-screen :">
+        <div className="my-5 flex justify-around  rounded-2xl  min-h-screen :">
           <div className="md:flex gap-7 p-2   justify-center items-center  min-h-screen">
             <div
               data-aos="fade-right"
               className=" card   bg-white/10 w-full max-w-sm shrink-0 "
             >
-              <h1 className="text-blue-900 text-center py-3 text-2xl font-bold  my-heading ">
+              <form onSubmit={handleAddBook} className="p-10 bg-blue-950/20 rounded-2xl ">
+              <h1 className="text-blue-900 dark:text-white text-center py-3 text-2xl font-bold  my-heading ">
                 Add your book
               </h1>
-              <form onSubmit={handleAddBook} className="px-5 pb-5 ">
                 <fieldset className="fieldset">
                   <label className="label text-gray-300">Title</label>
                   <input
@@ -140,7 +140,7 @@ const AddBook = () => {
                     id=""
                   ></textarea>
 
-                  <button className="text-white p-2 my-2 rounded-sm  bg-blue-950 opacity-65 text-xl  mt-4">
+                  <button className="text-white dark:text-black p-2 my-2 rounded-sm  bg-blue-950 dark:bg-blue-50   opacity-65 text-xl  mt-4">
                     Add Book
                   </button>
                 </fieldset>

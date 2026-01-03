@@ -13,9 +13,9 @@
 }
 /* font-family: "Roboto", sans-serif; */
 
-a.active{
+/* a.active{
   @apply bg-white rounded-full font-bold text-blue-950
-}
+} */
 
 .banner {
   background-image: url('./assets/library.jpg');

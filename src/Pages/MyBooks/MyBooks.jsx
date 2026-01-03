@@ -131,7 +131,7 @@ const MyBooks = () => {
         <div data-aos="fade-up" className="my-5 rounded-2xl bg-blue-950 min-h-screen">
           <div>
             <div className="overflow-x-auto rounded-xl">
-              <table className="table ">
+              <table className="table">
                 {/* head */}
                 <thead>
                   <tr>

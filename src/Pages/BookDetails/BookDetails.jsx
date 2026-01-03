@@ -3,6 +3,9 @@ import { useParams } from "react-router";
 import { useAxiosSecure } from "../../Hooks/useAxiosSecure";
 import MyContainer from "../../Components/MyContainer/MyContainer";
 import { useAuth } from "../../Hooks/useAuth";
+import { FaStar } from "react-icons/fa6";
+import { IoMdMail } from "react-icons/io";
+import { MdCategory } from "react-icons/md";
 
 const BookDetails = () => {
   const axiosSecure = useAxiosSecure();
@@ -75,11 +78,11 @@ const BookDetails = () => {
             </div>
 
             <div className="bg-white/10">
-              <h1>Genre: {book.genre}</h1>
-              <p>Create by: {book.userEmail}</p>
-              <div className="bg-yellow-500 text-blue-800 inline px-3 rounded-sm">
-                Rating: {book.rating}
+              <div className=" flex items-center gap-1 text-white  px-3 rounded-sm">
+                  <FaStar color="gold" />{book.rating}
               </div>
+              <h1 className="flex items-center gap-1">  <MdCategory />{book.genre}</h1>
+              <p className="flex items-center gap-1"><IoMdMail />{book.userEmail}</p>
               <div>summary: {book.summary}</div>
             </div>
           </div>

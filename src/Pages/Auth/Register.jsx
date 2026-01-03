@@ -74,10 +74,10 @@ const passRegEx = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 
 
   return (
-    <div className="flex p-2 bg-[#FED3D1]  justify-center items-center  min-h-screen">
+    <div className="flex p-2 dark:from-slate-900 dark:to-slate-800 bg-gradient-to-br from-indigo-50 to-purple-100  justify-center items-center  min-h-screen">
      <title>Register | The Book Haven</title>
         <div className=" card   bg-white/60 w-full max-w-sm shrink-0 ">
-            <h1 className="text-center py-3 text-2xl font-bold text-green-700 my-heading ">Register now</h1>
+            <h1 className="text-center py-3 text-2xl font-bold text-shadow-blue-950 my-heading ">Register now</h1>
           <form onSubmit={handleRegister} className="px-5 pb-5 ">
             <fieldset className="fieldset">
                 {/* name  */}
@@ -93,7 +93,7 @@ const passRegEx = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
               <label className="label">Password</label>
               <input type="password" name="password" className="input focus:outline-0 rounded-full" placeholder="Password" />
               <p className="text-red-400">{passErr}</p>
-              <button  className="text-[#5d806a] rounded-full text-xl btn bg-linear-to-br from-[#FED3D1] to-[#a58c8b] mt-4">Register</button>
+              <button  className="text-[#5d806a] rounded-full text-xl btn bg-blue-900 text-white mt-4">Register</button>
                   {/* Google */}
             <button onClick={handleGoogleSignIn} type="button" className="btn rounded-full bg-white/40 text-black border-[#e5e5e5]">
               <svg

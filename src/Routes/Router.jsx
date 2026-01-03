@@ -10,6 +10,9 @@ import BookDetails from "../Pages/BookDetails/BookDetails";
 import PageNotFound from "../Pages/PageNotFound";
 import PrivateRoute from "./PrivateRoute";
 import TermsAndConditions from "../Pages/TermsAndConditions/TermsAndConditions";
+import AboutUs from "../Pages/AboutUs/AboutUs";
+import DashboardLayout from "../Layouts/DashboardLayout";
+import OverView from "../Pages/Dashboard/OverView/OverView";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +30,10 @@ export const router = createBrowserRouter([
       {
         path: "terms",
         Component: TermsAndConditions,
+      },
+      {
+        path: "about-us",
+        Component: AboutUs,
       },
       {
         path: 'auth/login',
@@ -56,4 +63,22 @@ export const router = createBrowserRouter([
       
     ],
   },
+  {
+    path:'/dashboard',
+    element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+    children:[
+      {
+        index:true,
+        Component: OverView
+      },
+      {
+        path: '/dashboard/add-book',
+        Component: AddBook
+      },
+      {
+        path: '/dashboard/my-books',
+        Component: MyBooks
+      },
+    ]
+  }
 ]);
