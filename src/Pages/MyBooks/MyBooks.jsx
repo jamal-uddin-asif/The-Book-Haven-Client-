@@ -29,7 +29,7 @@ const MyBooks = () => {
 
   useEffect(() => {
     axiosSecure.get(`/all-books?email=${user?.email}`).then((data) => {
-      setMyBooks(data.data);
+      setMyBooks(data.data.result);
       setLoading(false);
     });
   }, [user, axiosSecure, refresh]);

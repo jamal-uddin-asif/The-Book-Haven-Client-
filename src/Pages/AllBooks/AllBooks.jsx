@@ -17,8 +17,14 @@ const AllBooks = () => {
   const [genre, setGenre] = useState("");
   const [search, setSearch] = useState("");
   console.log(books);
-
   const axiosSecure = useAxiosSecure();
+
+
+    const [totalBooks , setTotalBooks] = useState(0)
+    const [totalPage , setTotalPage] = useState(0)
+    const [currentPage, setCurrentPage] = useState(0)
+    const limit = 7;
+    console.log({totalBooks, totalPage})
 
   useEffect(() => {
     axiosSecure
@@ -26,14 +32,17 @@ const AllBooks = () => {
       .then((data) => {
         setBooks(data.data);
       });
-  }, [search, sort, genre, axiosSecure]);
+  }, [search, sort, genre, axiosSecure, ]);
 
   useEffect(() => {
-    axiosSecure.get("/all-books").then((data) => {
-      setBooks(data.data);
+    axiosSecure.get(`/all-books?limit=${limit}&skip=${limit * currentPage}`).then((data) => {
+      setBooks(data.data.result);
+      setTotalBooks(data.data.count)
+      const page = Math.ceil(data.data.count / limit)
+      setTotalPage(page)
       setLoading(false);
     });
-  }, [axiosSecure]);
+  }, [axiosSecure, currentPage]);
 
   // Animaton
 
@@ -138,6 +147,12 @@ const AllBooks = () => {
               </tbody>
             </table>
           </div>
+
+            <div className="flex  justify-center gap-4 flex-wrap my-9">
+                {
+                  [...Array(totalPage).keys()].map(i=><button onClick={()=>setCurrentPage(i)} className={`btn ${i == currentPage && 'bg-blue-950 text-white'}`}>{i}</button>)
+                }
+            </div>
         </div>
         }
        
