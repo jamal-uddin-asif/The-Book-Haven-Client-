@@ -9,6 +9,9 @@ const Register = () => {
   const {createUser, googleSignIn, setLoading} = useAuth()
 
   const [passErr , setPassErr] = useState('')
+  const [nameErr , setNameErr] = useState('')
+  const [emailErr , setEmailErr] = useState('')
+  const [photoUrlErr , setPhotoUrlErr] = useState('')
   const navigate = useNavigate()
 
 const passRegEx = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
@@ -19,18 +22,38 @@ const passRegEx = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
   const handleRegister = (e) =>{
     e.preventDefault();
     setPassErr('')
+    setEmailErr('')
+    setNameErr('')
+    setPhotoUrlErr('')
+
     const name = e.target.name.value;
     const photo = e.target.photo.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
     
-  
+
+
     
+    
+    if(!name){
+      setNameErr('Please enter your name')
+      return
+    }
+    if(!photo){
+      setPhotoUrlErr('Please enter your photo Url')
+      return
+    }
+    if(!email){
+      setEmailErr('Please enter your email')
+      return
+    }
     if(!passRegEx.test(password)){
       // toast.error('Password not valid')
       setPassErr("Password must 6 character with 1 upperCase 1 lowerCase ")
       return
     }
+
+
 
     createUser(email, password)
     .then(result=>{
@@ -66,8 +89,6 @@ const passRegEx = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 
 
   }
-
-  
       useEffect(() => {
       window.scrollTo(0, 0);
     }, []);
@@ -76,23 +97,26 @@ const passRegEx = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
   return (
     <div className="flex p-2 dark:from-slate-900 dark:to-slate-800 bg-gradient-to-br from-indigo-50 to-purple-100  justify-center items-center  min-h-screen">
      <title>Register | The Book Haven</title>
-        <div className=" card   bg-white/60 w-full max-w-sm shrink-0 ">
+        <div className=" card   bg-white/60 dark:bg-base-300 w-full max-w-sm shrink-0 ">
             <h1 className="text-center py-3 text-2xl font-bold text-shadow-blue-950 my-heading ">Register now</h1>
           <form onSubmit={handleRegister} className="px-5 pb-5 ">
             <fieldset className="fieldset">
                 {/* name  */}
               <label className="label">Name</label>
               <input type="text" name="name" className="input focus:outline-0 rounded-full " placeholder="Your Name" />
+               <p className="text-red-500">{nameErr}</p>
                 {/* photo  */}
               <label className="label">Photo</label>
               <input type="text" name="photo" className="input focus:outline-0 rounded-full" placeholder="PhotoURL" />
+               <p className="text-red-500">{photoUrlErr}</p>
                 {/* email  */}
               <label className="label">Email</label>
               <input type="email" name="email" className="input focus:outline-0 rounded-full" placeholder="Email" />
+               <p className="text-red-500">{emailErr}</p>
                 {/* password  */}
               <label className="label">Password</label>
               <input type="password" name="password" className="input focus:outline-0 rounded-full" placeholder="Password" />
-              <p className="text-red-400">{passErr}</p>
+              <p className="text-red-500">{passErr}</p>
               <button  className="text-[#5d806a] rounded-full text-xl btn bg-blue-900 text-white mt-4">Register</button>
                   {/* Google */}
             <button onClick={handleGoogleSignIn} type="button" className="btn rounded-full bg-white/40 text-black border-[#e5e5e5]">

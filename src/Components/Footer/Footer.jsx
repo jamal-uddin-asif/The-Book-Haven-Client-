@@ -1,10 +1,11 @@
 import React from "react";
 import MyContainer from "../MyContainer/MyContainer";
 import { FaFacebook, FaInstagram, FaLinkedin, FaWhatsapp, FaXTwitter, FaYoutube } from "react-icons/fa6";
+import { Link } from "react-router";
 
 const Footer = () => {
   return (
-    <div className="py-8 pt-5 text-white bg-blue-950">
+    <div className="py-8 pt-5 md:p-5 p-2 text-white bg-blue-950">
         <title>Register | The Book Haven</title>
       <MyContainer>
         {/* top div  */}
@@ -32,12 +33,11 @@ const Footer = () => {
           <div>
             <h1 className="text-2xl border-b">Pages</h1>
             <ul className="text-gray-300 mt-2 ">
-                <li>Home</li>
-                <li>All books</li>
-                <li>Add books</li>
-                <li>My books</li>
-                <li>LogIn</li>
-                <li>Registration</li>
+                <li><Link to={'/'}>Home</Link></li>
+                <li><Link to={'/all-books'}>All books</Link></li>
+                <li><Link to={'/terms'}>Terms</Link></li>
+                <li><Link to={'/about-us'}>About</Link></li>
+          
             </ul>
           </div>
           <div>
@@ -52,30 +52,18 @@ const Footer = () => {
           <div>
             <h1 className="text-2xl border-b">Quick Connect</h1>
             <div className="mt-2 space-y-2">
-                <div className="flex items-center space-x-1.5">
+                <Link to={'https://www.facebook.com/asifzehendmg'} className="flex items-center space-x-1.5">
                     <FaFacebook />
                     <p>Facebook</p>
-                </div>
-                <div className="flex items-center space-x-1.5">
-                    <FaXTwitter />
-                    <p>Twitter</p>
-                </div>
-                <div className="flex items-center space-x-1.5">
+                </Link>
+               
+                <Link to={'https://www.instagram.com/asif_zehen76/'} className="flex items-center space-x-1.5">
                     <FaInstagram></FaInstagram>
                     <p>Instagram</p>
-                </div>
-                <div className="flex items-center space-x-1.5">
-                    <FaLinkedin></FaLinkedin>
-                    <p>Linkedin</p>
-                </div>
-                <div className="flex items-center space-x-1.5">
-                    <FaYoutube></FaYoutube>
-                    <p>Youtube</p>
-                </div>
-                <div className="flex items-center space-x-1.5">
-                    <FaWhatsapp></FaWhatsapp>
-                    <p>Whatsapp</p>
-                </div>
+                </Link>
+             
+         
+               
             </div>
           </div>
           <div>

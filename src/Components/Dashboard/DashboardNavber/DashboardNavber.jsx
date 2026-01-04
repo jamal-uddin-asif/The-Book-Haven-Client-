@@ -19,7 +19,7 @@ const DashboardNavber = ({ SetSidebarOpen, sidebarOpen }) => {
 
       <div className="flex relative gap-3">
         <div>
-          <img className="h-12 rounded-full" src={user?.photoURL} alt="" />
+          <img className="h-12 w-12 rounded-full" src={user?.photoURL} alt="" />
         </div>
         <div>
           <h1 className="font-bold">{user.displayName}</h1>
@@ -31,12 +31,13 @@ const DashboardNavber = ({ SetSidebarOpen, sidebarOpen }) => {
           </div>
           <ul
             tabIndex="-1"
-            className="absolute -left-45 top-16 dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+            className="absolute bg-blue-50 dark:bg-base-200 -left-45 top-16 dropdown-content menu  rounded-box z-1 w-52 p-2 shadow-sm"
           >
-            <li className="font-bold">
-             <Link><CgProfile />Profile</Link>
+            <li className="font-bold ">
+             <Link to={'/dashboard/profile'}><CgProfile />Profile</Link>
             </li>
-         
+
+            
           </ul>
         </div>
       </div>

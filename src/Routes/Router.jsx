@@ -13,6 +13,11 @@ import TermsAndConditions from "../Pages/TermsAndConditions/TermsAndConditions";
 import AboutUs from "../Pages/AboutUs/AboutUs";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import OverView from "../Pages/Dashboard/OverView/OverView";
+import DashboardMybooks from "../Pages/Dashboard/DashboardMybooks/DashboardMybooks";
+import Profile from "../Pages/Dashboard/Profile/Profile";
+import AccountDetails from "../Pages/Dashboard/Profile/AccountDetails/AccountDetails";
+import UpdateProfile from "../Pages/Dashboard/Profile/UpdateProfile/UpdateProfile";
+
 
 export const router = createBrowserRouter([
   {
@@ -70,15 +75,29 @@ export const router = createBrowserRouter([
       {
         index:true,
         Component: OverView
-      },
+      }, 
       {
         path: '/dashboard/add-book',
         Component: AddBook
       },
       {
         path: '/dashboard/my-books',
-        Component: MyBooks
+        Component: DashboardMybooks
       },
+      {
+        path: '/dashboard/profile',
+        Component: Profile,
+        children: [
+          {
+            index:true,
+            Component:AccountDetails,
+          },
+          {
+            path: '/dashboard/profile/updateProfile',
+            Component: UpdateProfile
+          }
+        ]
+      }
     ]
   }
 ]);

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { useAuth } from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
@@ -9,11 +9,29 @@ const Login = () => {
   const navigate = useNavigate();
   const from = location.state || "/";
 
+  const [emailErr, setEmailErr] = useState('')
+  const [passErr, setPassErr] = useState('')
+
+  const [useEmail, setUserEmail] = useState('')
+  const [userPass, setUserPass] = useState('')
+
   const handleLogin = (e) => {
     e.preventDefault();
 
+    setPassErr('')
+    setEmailErr('')
+
     const email = e.target.email.value;
     const password = e.target.password.value;
+
+    if(!email){
+      setEmailErr('Please enter your email')
+      return
+    }
+    if(!password){
+      setPassErr('Please enter your password')
+      return
+    }
 
     signInUser(email, password)
       .then((result) => {
@@ -27,6 +45,8 @@ const Login = () => {
       });
   };
 
+
+
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((result) => {
@@ -39,15 +59,20 @@ const Login = () => {
         toast.error(err.code);
       });
   };
-
-  
       useEffect(() => {
       window.scrollTo(0, 0);
     }, []);
+
+    const handleCredentials =()=>{
+      const email = 'as@if.com'
+      const pass = 'Asdfjk@2'
+      setUserEmail(email)
+      setUserPass(pass)
+    }
   return (
     <div className="flex p-2 dark:from-slate-900 dark:to-slate-800 bg-gradient-to-br from-indigo-50 to-purple-100 justify-center items-center  min-h-screen">
       <title>Login | The Book Haven</title>
-      <div className=" card  bg-white/60 w-full max-w-sm shrink-0 ">
+      <div className=" card  bg-white/60  dark:bg-base-300 w-full max-w-sm shrink-0 ">
         <h1 className="text-center py-3 text-2xl font-bold text-shadow-blue-950 my-heading ">
           Login now
         </h1>
@@ -56,22 +81,29 @@ const Login = () => {
             {/* email  */}
             <label className="label">Email</label>
             <input
+            defaultValue={useEmail}
               type="email"
               name="email"
               className="input focus:outline-0 rounded-full"
               placeholder="Email"
             />
+            <p className="text-red-500">{emailErr}</p>
             {/* password  */}
             <label className="label">Password</label>
             <input
+            defaultValue={userPass}
               type="password"
               name="password"
               className="input focus:outline-0 rounded-full"
               placeholder="Password"
             />
+            <p className="text-red-500">{passErr}</p>
+
+
             <div>
               <a className="link link-hover">Forgot password?</a>
             </div>
+            <p onClick={handleCredentials} className="btn ">User credentials</p>
             <button className="text-[#5d806a] rounded-full text-xl btn bg-blue-900 text-white mt-4">
               Login
             </button>

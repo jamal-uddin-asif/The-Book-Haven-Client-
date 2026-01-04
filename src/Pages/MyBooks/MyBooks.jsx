@@ -134,14 +134,14 @@ const MyBooks = () => {
               <table className="table">
                 {/* head */}
                 <thead>
-                  <tr>
-                    <th className="text-blue-900 bg-blue-300">Book</th>
-                    <th className="text-blue-900 hidden md:block bg-blue-300 ">
+                  <tr className="bg-blue-950">
+                    <th className=" text-white">Book</th>
+                    <th className="text-white hidden md:block ">
                       Genre
                     </th>
-                    <th className="text-blue-900 bg-blue-300 ">Rating</th>
-                    <th className="text-blue-900 bg-blue-300 w-10">Update</th>
-                    <th className="text-blue-900 bg-blue-300 w-12">Delete</th>
+                    <th className="text-white ">Rating</th>
+                    <th className="text-white w-10">Update</th>
+                    <th className="text-white w-12">Delete</th>
                   </tr>
                 </thead>
                 <tbody>

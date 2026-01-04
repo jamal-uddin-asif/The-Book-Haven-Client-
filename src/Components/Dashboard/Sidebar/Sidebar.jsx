@@ -4,8 +4,10 @@ import { IoMenuSharp } from "react-icons/io5";
 import { Link, NavLink } from "react-router";
 import SideLink from "../SideLink/SideLink";
 import { useAuth } from "../../../Hooks/useAuth";
-import { FaAngleDown } from "react-icons/fa6";
+import { FaAngleDown, FaBookOpenReader } from "react-icons/fa6";
 import { CgProfile } from "react-icons/cg";
+import { BiSolidBookAdd } from "react-icons/bi";
+import { HiOutlineChartBar } from "react-icons/hi";
 
 const Sidebar = ({ SetSidebarOpen, sidebarOpen }) => {
   const { user } = useAuth();
@@ -29,7 +31,7 @@ const Sidebar = ({ SetSidebarOpen, sidebarOpen }) => {
 
       <div className="flex my-6 p-2 bg-blue-100 dark:bg-base-100 rounded-xl relative gap-3">
         <div>
-          <img className="h-12 rounded-full" src={user?.photoURL} alt="" />
+          <img className="h-12 w-12 rounded-full" src={user?.photoURL} alt="" />
         </div>
         <div>
           <h1 className="font-bold">{user.displayName}</h1>
@@ -40,13 +42,13 @@ const Sidebar = ({ SetSidebarOpen, sidebarOpen }) => {
       <div>
         <ul>
           <li>
-            <SideLink to={"/dashboard"}>Overview</SideLink>
+            <SideLink end to={"/dashboard"} className={'flex items-center gap-2'}><HiOutlineChartBar/> Overview</SideLink>
           </li>
           <li>
-            <SideLink to={"/dashboard/add-book"}>Add book</SideLink>
+            <SideLink to={"/dashboard/add-book"} className={'flex items-center gap-2'}>  <BiSolidBookAdd />Add book</SideLink>
           </li>
           <li>
-            <SideLink to={"/dashboard/my-books"}>My books</SideLink>
+            <SideLink className={'flex items-center gap-2'} to={"/dashboard/my-books"}> <FaBookOpenReader />My books</SideLink>
           </li>
         </ul>
       </div>
