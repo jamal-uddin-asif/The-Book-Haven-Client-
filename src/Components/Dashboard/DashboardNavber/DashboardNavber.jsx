@@ -9,7 +9,7 @@ const DashboardNavber = ({ SetSidebarOpen, sidebarOpen }) => {
   const { user } = useAuth();
   console.log(user);
   return (
-    <div className="bg-white dark:bg-base-200 p-3 flex justify-between items-center">
+    <div className="bg-white shadow dark:bg-base-200 p-3 flex justify-between items-center">
       <div className=" flex items-center gap-1 font-bold">
         <div onClick={() => SetSidebarOpen(!sidebarOpen)} className="md:hidden">
           <IoMenuSharp />

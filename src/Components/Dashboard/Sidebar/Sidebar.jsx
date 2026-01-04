@@ -11,7 +11,7 @@ const Sidebar = ({ SetSidebarOpen, sidebarOpen }) => {
   const { user } = useAuth();
   return (
     <div
-      className={`shadow-2xl p-5 lg:w-64 bg-white dark:bg-base-300 h-full min-h-screen absolute md:static ${
+      className={`shadow p-5 lg:w-64 bg-white dark:bg-base-300 h-full min-h-screen absolute md:static ${
         sidebarOpen ? "left-0 duration-100 fixed" : "-left-70 duration-100"
       } `}
     >

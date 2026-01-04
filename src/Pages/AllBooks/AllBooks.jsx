@@ -7,22 +7,26 @@ import { FaStar } from "react-icons/fa6";
 import { SyncLoader } from "react-spinners";
 
 import Aos from "aos";
-import 'aos/dist/aos.css'
+import "aos/dist/aos.css";
 
 const AllBooks = () => {
   const [books, setBooks] = useState([]);
 
   const [loading, setLoading] = useState(true);
   const [sort, setSort] = useState("");
+  const [genre, setGenre] = useState("");
+  const [search, setSearch] = useState("");
+  console.log(books);
 
   const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
-    axiosSecure.get(`/all-books-sort?sort=${sort}`)
-    .then(data=>{
-        setBooks(data.data)
-    })
-  }, [sort, axiosSecure]);
+    axiosSecure
+      .get(`/all-books-sort?sort=${sort}&search=${search}&genre=${genre}`)
+      .then((data) => {
+        setBooks(data.data);
+      });
+  }, [search, sort, genre, axiosSecure]);
 
   useEffect(() => {
     axiosSecure.get("/all-books").then((data) => {
@@ -31,40 +35,61 @@ const AllBooks = () => {
     });
   }, [axiosSecure]);
 
-    // Animaton 
-    
-    useEffect(()=>{
-      Aos.init();
-    },[])
+  // Animaton
+
+  useEffect(() => {
+    Aos.init();
+  }, []);
 
   if (loading) {
-    return <div className="flex justify-center items-center min-h-screen">
-         <SyncLoader/>
-    </div>;
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <SyncLoader />
+      </div>
+    );
   }
 
   return (
-    <div className="">
+    <div className="min-h-screen">
       <title>All Book | The Book Haven</title>
       <MyContainer>
-        <div className="border-b mb-4 my-heading py-4 text-xl">
-          <span>Sort by rating</span> {/* <form > */}
-          <select
-            onChange={(e) => setSort(e.target.value)}
-            name=""
-            className="select focus:outline-0 "
-          >
-            <option disabled={true}>Chose one</option>
-            <option value="low-high">Low to High</option>
-            <option value="high-low">High to Low</option>
-          </select>
-          {/* </form> */}
+        <div className="md:flex  justify-between items-center bg-blue-100 dark:bg-base-300  p-2 border-b mb-4 my-heading py-4 text-xl">
+          <input
+            onChange={(e) => setSearch(e.target.value)}
+            className="input outline-0"
+            type="search"
+            placeholder="Search book"
+          />
+          <div className="flex gap-2">
+            <select
+              onChange={(e) => setSort(e.target.value)}
+              name=""
+              className="select outline-0 max-w-[190px]"
+            >
+              <option disabled={true}>Chose one</option>
+              <option value="low-high">Rating desc</option>
+              <option value="high-low">Rating asc</option>
+            </select>
+
+            <select
+              onChange={(e) => setGenre(e.target.value)}
+              name=""
+              className="select outline-0 max-w-[170px]"
+            >
+              <option disabled={true}>Pick one</option>
+              <option value="Fantasy">Fantasy</option>
+              <option value="Mystery">Mystery</option>
+              <option value="Not-Fiction">Not-Fiction</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
         </div>
-        <div data-aos="fade-up">
+        {books.length == 0 ? <div className="text-xl flex justify-center min-h-screen items-center">Books not found</div>:
+         <div>
           <div className="overflow-x-auto">
             <table className="table ">
               {/* head */}
-              <thead className="bg-red-600">
+              <thead className="bg-blue-950">
                 <tr>
                   <th className="text-white">Book</th>
                   <th className="text-white hidden md:block">Genre</th>
@@ -73,8 +98,8 @@ const AllBooks = () => {
                 </tr>
               </thead>
               <tbody>
-                {books?.map((book,i) => (
-                  <tr className={i % 2 !== 0? 'bg-cyan-200' : 'bg-cyan-600'}>
+                {books?.map((book, i) => (
+                  <tr key={i} className={`shadow bg-blue-50 dark:bg-base-300`}>
                     <td>
                       <div className="flex items-center gap-3">
                         <div className="avatar">
@@ -91,7 +116,9 @@ const AllBooks = () => {
                       </div>
                     </td>
 
-                    <td className="hidden md:block font-semibold">{book.genre}</td>
+                    <td className="hidden md:block font-semibold">
+                      {book.genre}
+                    </td>
                     <td className="w-10">
                       <div className="badge badge-warning">
                         {book?.rating}
@@ -112,6 +139,8 @@ const AllBooks = () => {
             </table>
           </div>
         </div>
+        }
+       
       </MyContainer>
     </div>
   );

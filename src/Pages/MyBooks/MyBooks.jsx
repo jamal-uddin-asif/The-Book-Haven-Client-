@@ -148,8 +148,8 @@ const MyBooks = () => {
                   {books?.map((book, i) => (
                     <tr
                       className={`${
-                        i % 2 === 0 ? "bg-amber-100" : "bg-emerald-200"
-                      }`}
+                        i % 2 === 0 ? "bg-base-300" : "bg-base-100"
+                      } shadow-2xl`}
                     >
                       <td>
                         <div className="flex items-center gap-3">
@@ -169,8 +169,8 @@ const MyBooks = () => {
 
                       <td className="w-10 font-semibold hidden md:block">{book.genre}</td>
                       <td>
-                        <div className="w-10 badge badge-warning">
-                          {book?.rating}
+                        <div className="w-10 badge badge-">
+                          {book?.rating} 
                           <FaStar color="gold" />
                         </div>
                       </td>
