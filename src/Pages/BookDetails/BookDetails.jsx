@@ -6,6 +6,8 @@ import { useAuth } from "../../Hooks/useAuth";
 import { FaStar } from "react-icons/fa6";
 import { IoMdMail } from "react-icons/io";
 import { MdCategory } from "react-icons/md";
+import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
+import toast from "react-hot-toast";
 
 const BookDetails = () => {
   const axiosSecure = useAxiosSecure();
@@ -34,6 +36,7 @@ const BookDetails = () => {
 
   const handleComment = (e) => {
     e.preventDefault();
+    if(!user) return toast.error('Please signIn')
     const comment = e.target.comment.value;
     const displayName = user.displayName;
     const photoURL =
@@ -59,11 +62,13 @@ const BookDetails = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  if(loading) return <LoadingSpinner/>
+
   return (
-    <div>
+    <div className="px-1">
       <title>Book Details | The Book Haven</title>
       <MyContainer>
-        <div className="md:flex py-10  bg-blue-950/80 rounded-2xl mt-5 text-white">
+        <div className="md:flex py-10   bg-blue-950/80 rounded-2xl mt-5 text-white">
           <div  className="flex-1 px-2">
             <img
               className="max-h-[400px] mx-auto"
@@ -89,43 +94,77 @@ const BookDetails = () => {
         </div>
 
         {/* comments  */}
-        <div className="my-5 bg-linear-to-br from-fuchsia-400 to-gray-800 rounded-2xl p-2">
-          <form onSubmit={handleComment}>
-            <h1 className="border-b mb-4 my-heading py-4 text-2xl border-blue-700 text-gray-200 text-center">
-              Comment about this book
-            </h1>
-            <div className="flex space-y-3 flex-col">
-              <textarea
-                name="comment"
-                placeholder="Comment here...."
-                cols={25}
-                rows={4}
-                className="border  p-2 border-blue-800 rounded-xl"
-              ></textarea>
-              <button className=" p-2 max-w-27 mx-auto rounded-sm  bg-blue-950 text-[#FED3D1] shadow-xl  opacity-65 hover:bg-green-500">
-                Comment
-              </button>
-            </div>
-          </form>
-
+  {/* --- Comment Section Start --- */}
+<div className="my-10 max-w-4xl mx-auto">
+  <div className="light:bg-white dark:bg-dark rounded-2xl shadow-sm   overflow-hidden">
+    
+    {/* Form Section */}
+    <div className="p-6 md:p-8 border-b border-slate-100 dark:bg-base-300 bg-slate-50/50">
+      <h2 className="text-2xl font-bold light:text-slate-800 mb-6 flex items-center gap-2">
+        Reader Discussions 
+        <span className="text-sm font-normal light:text-slate-500  bg-base-100 px-2 py-1 rounded-full border">
+          {comments?.length || 0}
+        </span>
+      </h2>
+      
+      <form onSubmit={handleComment} className="space-y-4">
+        <textarea
+          name="comment"
+          required
+          placeholder="Write your thoughts about this book..."
+          rows={3}
+          className="w-full p-4   border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none shadow-sm"
+        ></textarea>
+        
+        <div className="flex justify-end">
+          <button className="bg-blue-900 hover:bg-blue-700 text-white px-8 py-2.5 rounded-lg font-semibold transition-all shadow-md hover:shadow-blue-200 active:scale-95">
+            Post Comment
+          </button>
         </div>
-          <div className="space-y-5 my-5 bg-blue-950 rounded-xl text-gray-300 p-3">
-            {comments?.map((comment) => (
-              <div>
-                <div className="flex items-center gap-2 ">
-                  <div className="border-2 w-10 rounded-full">
-                    <img className="rounded-full" src={comment.photoURL} alt='' />
-                  </div>
-                  <h1 className="text-sm font-bold ">{comment.displayName}</h1>
-                </div>
+      </form>
+    </div>
 
-                <div className="text-sm ">
-                  <p className="text-sm mb-2">{comment.created_at}</p>
-                  <div>{comment.comment}</div>
+    {/* Comments List */}
+    <div className="p-6 md:p-8 space-y-6 bg-white dark:bg-base-300">
+      {comments && comments.length > 0 ? (
+        comments.map((comment, index) => (
+          <div key={index} className="flex gap-4 group">
+            {/* User Avatar */}
+            <div className="flex-shrink-0">
+              <img 
+                className="w-12 h-12 rounded-full border-2  shadow-sm object-cover" 
+                src={comment.photoURL} 
+                alt={comment.displayName} 
+              />
+            </div>
+
+            {/* Comment Content */}
+            <div className="flex-1">
+              <div className="bg-slate-50 dark:bg-base-300 p-4 rounded-2xl rounded-tl-none group-hover:bg-slate-100 group-hover:text-black transition-colors">
+                <div className="flex items-center justify-between mb-1">
+                  <h4 className="font-bold text-sm md:text-base">
+                    {comment.displayName}
+                  </h4>
+                  <span className="text-[12px] light:text-slate-400 dark:text-white font-medium">
+                    {comment.created_at}
+                  </span>
                 </div>
+                <p className="light:text-slate-600 text-sm md:text-base leading-relaxed">
+                  {comment.comment}
+                </p>
               </div>
-            ))}
+            </div>
           </div>
+        ))
+      ) : (
+        <div className="text-center py-10">
+          <p className="text-slate-400 italic">No comments yet. Be the first to share your thoughts!</p>
+        </div>
+      )}
+    </div>
+  </div>
+</div>
+{/* --- Comment Section End --- */}
       </MyContainer>
     </div>
   );

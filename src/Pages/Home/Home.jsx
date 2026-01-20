@@ -19,6 +19,8 @@ import { BlogSection } from "../../Components/Home/BlogSection/BlogSection";
 import { NewsletterSection } from "../../Components/Home/NewsletterSection/NewsletterSection";
 import { FAQSection } from "../../Components/Home/FAQSection/FAQSection";
 import { CTASection } from "../../Components/Home/CTASection/CTASection";
+import Banner from "../../Components/Home/Banner/Banner";
+import BookOfTheWeek from "../../Components/Home/BookOfTheWeek/BookOfTheWeek";
 
 const Home = () => {
   const axiosSecure = useAxiosSecure();
@@ -30,7 +32,7 @@ const Home = () => {
       setLatestBooks(data.data);
       setLoading(false);
     });
-  });
+  }, []);
 
   // Animaton
 
@@ -43,57 +45,15 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="bg-base-200 p-2 md:p-4">
+    <div className="bg-blue-50 dark:bg-base-100  ">
       <title>Home | The Book Haven</title>
       {/* banner  */}
+      
+       <Banner/>
 
-      <div className="">
-        <MyContainer>
-          <div className="relative  banner my-5 rounded-xl text-white ">
-            <div className="  md:flex py-15  items-center justify-center text-center ">
-              <div
-                data-aos="fade-up"
-                className="space-y-4 bg-white/20 rounded-xl p-2"
-              >
-                <h1 className="tracking-wide text-3xl  bg-blue-950 p-2 rounded-xl font-bold  md:text-4xl  lg:text-5xl my-heading ">
-                  Your Personal Library, Reimagined
-                </h1>
-                <div className="my-heading rounded-full tracking-wider mb-4  ">
-                  <p>Add, explore, and cherish every book that inspires you.</p>
-                  <p>
-                    Discover new reads, share your favorites, and build your
-                    dream collection.
-                  </p>
-                </div>
-              </div>
-              {/* <div data-aos="fade-left p-8">
-               
-                <img className="mx-auto " src={books} alt="" />
-              </div> */}
-            </div>
-
-            <div
-              data-aos="fade-up"
-              className="flex justify-center items-center bottom-5 left-5 space-x-2 "
-            >
-              <Link
-                to={"/all-books"}
-                className=" p-2 rounded-sm  bg-blue-950 text-white shadow-xl shadow-blue-900  hover:bg-blue-800"
-              >
-                All Books
-              </Link>
-              <Link
-                to={"/add-book"}
-                className=" p-2 rounded-sm  bg-blue-950 text-white shadow-xl shadow-blue-900 hover:bg-blue-800 "
-              >
-                Create Book
-              </Link>
-            </div>
-          </div>
-
+       <MyContainer>
           {/* books section  */}
-
-          <div className="md:grid gap-3 ">
+          <div className="md:grid gap-3 p-2 md:p-4">
             {/* books  */}
             <div className="">
               <h1 className="border-b mb-4 my-heading py-4 text-2xl">
@@ -113,27 +73,9 @@ const Home = () => {
             </div>
             {/* book of the week  */}
           </div>
-          <div className="my-10 md:my-20 py-3 rounded-2xl">
-            <h1 className="text-2xl pt-3 border-b pb-3 mb-3">Book of the Week</h1>
-            <div className="md:flex  justify-between ">
-             <div className=" flex-1 py-4">
-              The Power of Positive Thinking: A Practical Guide to Mastering the
-              Problems of Everyday Living is a 1952 self-help book by American
-              minister Norman Vincent Peale. It provides anecdotal "case
-              histories" of positive thinking using a biblical approach, and
-              practical instructions which were designed to help the reader
-              achieve a permanent and optimistic attitude. These techniques
-              usually involved affirmations and visualizations. Peale claimed
-              that such techniques would give the reader a higher satisfaction
-              and quality of life. The book was negatively reviewed by scholars
-              and health experts{" "}
-            </div>
-              <div className="flex-1">
-                <img className="max-h-100 mx-auto" src="https://i.ibb.co.com/j970FVrw/positive.webp" alt="" />
-              </div>
-            </div>
-           
-          </div>
+
+          <BookOfTheWeek/>
+
 
           <FeatureOfThisWeb />
 
@@ -151,7 +93,7 @@ const Home = () => {
         <FAQSection />
 
         <CTASection />
-      </div>
+     
     </div>
   );
 };

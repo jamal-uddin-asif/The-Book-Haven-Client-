@@ -34,7 +34,7 @@ const OverView = () => {
       setTotalBooks(data.data);
     });
   }, [axiosSecure]);
-  console.log({ books, totalBooks });
+  console.log({countGenre});
 
   useEffect(() => {
     axiosSecure.get("/count-genre").then((data) => {
