@@ -61,7 +61,7 @@ const AllBooks = () => {
   if (loading) return <LoadingSpinner/>
 
   return (
-<div className="min-h-screen bg-slate-50 dark:bg-slate-900 pb-20 transition-colors duration-300">
+<div className="min-h-screen md:px-6 px-2 bg-slate-50 dark:bg-slate-900 pb-20 transition-colors duration-300">
       <title>Explore Books | The Book Haven</title>
       
       <MyContainer>

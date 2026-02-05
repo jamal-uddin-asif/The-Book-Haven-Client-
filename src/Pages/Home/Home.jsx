@@ -56,9 +56,13 @@ const Home = () => {
           <div className="md:grid gap-3 p-2 md:p-4">
             {/* books  */}
             <div className="">
-              <h1 className="border-b mb-4 my-heading py-4 text-2xl">
-                Latest Books here
-              </h1>
+               {/* Signature Title */}
+      <div className="mb-14">
+        <h2 className="text-3xl font-black text-slate-800 dark:text-white uppercase tracking-tighter">
+          Latest Books <span className="text-emerald-500">here</span>
+        </h2>
+        <div className="h-1.5 w-20 bg-emerald-500 mt-2 rounded-full"></div>
+      </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 ">
                 {loading ? (
                   <div className="col-span-full">

@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 const Banner = () => {
   return (
-    <div className="relative  banner my-5  text-white ">
+    <div className="relative  banner mb-5  text-white ">
       <div className="  md:flex py-15  items-center justify-center text-center ">
         <div
           data-aos="fade-up"

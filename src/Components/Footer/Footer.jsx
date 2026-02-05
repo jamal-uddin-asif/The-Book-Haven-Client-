@@ -1,88 +1,104 @@
 import React from "react";
 import MyContainer from "../MyContainer/MyContainer";
-import { FaFacebook, FaInstagram, FaLinkedin, FaWhatsapp, FaXTwitter, FaYoutube } from "react-icons/fa6";
-import { Link } from "react-router";
+import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa6"; // Added LinkedIn
+import { Link } from "react-router"; 
+import { motion } from "framer-motion";
 
 const Footer = () => {
-  return (
-    <div className="py-8 pt-5 md:p-5 p-2 text-white bg-blue-950">
-        <title>Register | The Book Haven</title>
-      <MyContainer>
-        {/* top div  */}
-        <div className="md:flex space-y-1 border-b pb-3 items-center justify-between">
-          {/* left  */}
-          <div className="flex items-center">
-            <img
-              className="w-10 h-10"
-              src="https://img.icons8.com/plasticine/100/book.png"
-              alt=""
-            />
-            <div className="">
-              <span className="text-2xl ">H</span>aven
-            </div>
-          </div>
+  const fadeIn = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.8 } }
+  };
 
-          {/* right  */}
-          <div>
-            <p>Add, explore, and cherish every book that inspires you.</p>
+  return (
+    <motion.footer 
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      variants={fadeIn}
+      className="bg-slate-950 md:px-6 px-2 text-slate-300 pt-16 pb-6 border-t border-slate-900"
+    >
+      <MyContainer>
+        {/* Top Header Section */}
+        <div className="flex flex-col md:flex-row justify-between items-center pb-8 border-b border-slate-800 gap-4">
+          <div className="flex items-center gap-2">
+            <img
+              className="w-8 h-8"
+              src="https://img.icons8.com/plasticine/100/book.png"
+              alt="Logo"
+            />
+            <span className="text-2xl font-black text-white uppercase tracking-tighter">
+              Book <span className="text-emerald-500">Haven</span>
+            </span>
           </div>
+          
+          <p className="text-slate-500 text-sm md:text-base">
+            Add, explore, and cherish every book that inspires you.
+          </p>
         </div>
 
-        {/* middle div  */}
-        <div className="md:flex space-y-6 justify-between py-4 border-b ">
-          <div>
-            <h1 className="text-2xl border-b">Pages</h1>
-            <ul className="text-gray-300 mt-2 ">
-                <li><Link to={'/'}>Home</Link></li>
-                <li><Link to={'/all-books'}>All books</Link></li>
-                <li><Link to={'/terms'}>Terms</Link></li>
-                <li><Link to={'/about-us'}>About</Link></li>
+        {/* Middle Grid Section */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 py-12 border-b border-slate-800">
           
+          {/* Column 1: Navigation */}
+          <div>
+            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6">Pages</h4>
+            <ul className="space-y-3 text-sm">
+                <li><Link to={'/'} className="hover:text-emerald-500 transition-colors">Home</Link></li>
+                <li><Link to={'/all-books'} className="hover:text-emerald-500 transition-colors">All books</Link></li>
+                <li><Link to={'/terms'} className="hover:text-emerald-500 transition-colors">Terms</Link></li>
+                <li><Link to={'/about-us'} className="hover:text-emerald-500 transition-colors">About</Link></li>
             </ul>
           </div>
+
+          {/* Column 2: About us */}
           <div>
-            <h1 className="text-2xl border-b ">About us</h1>
-            <div className="text-gray-300 mt-2 space-y-2">
-                <p>Corporate Profile</p>
-                <p>Our team</p>
-                <p>Portfolio</p>
-                <p>Our office</p>
+            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6">About us</h4>
+            <ul className="space-y-3 text-sm text-slate-400">
+                <li className="hover:text-white cursor-pointer transition-colors">Corporate Profile</li>
+                <li className="hover:text-white cursor-pointer transition-colors">Our team</li>
+                <li className="hover:text-white cursor-pointer transition-colors">Portfolio</li>
+                <li className="hover:text-white cursor-pointer transition-colors">Our office</li>
+            </ul>
+          </div>
+
+          {/* Column 3: Quick Connect (Updated with LinkedIn) */}
+          <div>
+            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6">Quick Connect</h4>
+            <div className="space-y-3">
+                <Link to={'https://www.facebook.com/asifzehendmg'} target="_blank" className="flex items-center gap-2 hover:text-emerald-500 transition-all group">
+                    <FaFacebook className="group-hover:scale-110 transition-transform" />
+                    <span className="text-sm">Facebook</span>
+                </Link>
+                <Link to={'https://www.instagram.com/asif_zehen76/'} target="_blank" className="flex items-center gap-2 hover:text-emerald-500 transition-all group">
+                    <FaInstagram className="group-hover:scale-110 transition-transform" />
+                    <span className="text-sm">Instagram</span>
+                </Link>
+                {/* LinkedIn Link Added Here */}
+                <Link to={'https://www.linkedin.com/in/asif-jamaluddin/'} target="_blank" className="flex items-center gap-2 hover:text-emerald-500 transition-all group">
+                    <FaLinkedin className="group-hover:scale-110 transition-transform" />
+                    <span className="text-sm">LinkedIn</span>
+                </Link>
             </div>
           </div>
+
+          {/* Column 4: Latest Books */}
           <div>
-            <h1 className="text-2xl border-b">Quick Connect</h1>
-            <div className="mt-2 space-y-2">
-                <Link to={'https://www.facebook.com/asifzehendmg'} className="flex items-center space-x-1.5">
-                    <FaFacebook />
-                    <p>Facebook</p>
-                </Link>
-               
-                <Link to={'https://www.instagram.com/asif_zehen76/'} className="flex items-center space-x-1.5">
-                    <FaInstagram></FaInstagram>
-                    <p>Instagram</p>
-                </Link>
-             
-         
-               
-            </div>
-          </div>
-          <div>
-            <h1 className="text-2xl border-b">Latest books</h1>
-            <div className="mt-2 space-y-2">
-                <p>The Power of Money</p>
-                <p>The Power of Positive thinking</p>
-                <p>How to talk to anyone</p>
-                <p></p>
+            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6">Latest books</h4>
+            <div className="space-y-3 text-sm">
+                <p className="hover:text-emerald-400 cursor-pointer transition-colors">The Power of Money</p>
+                <p className="hover:text-emerald-400 cursor-pointer transition-colors">The Power of Positive thinking</p>
+                <p className="hover:text-emerald-400 cursor-pointer transition-colors">How to talk to anyone</p>
             </div>
           </div>    
         </div>
 
-        {/* bottom div  */}
-        <div className="text-center pt-2 text-sm ">
+        {/* Bottom Section */}
+        <div className="text-center pt-8 text-xs text-slate-600 font-medium uppercase tracking-[0.2em]">
             © 2025 The Book Haven. All rights reserved.
         </div>
       </MyContainer>
-    </div>
+    </motion.footer>
   );
 };
 

@@ -7,9 +7,8 @@ import { Link } from "react-router";
 import { SyncLoader } from "react-spinners";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import { motion } from "framer-motion";
 
-import Aos from "aos";
-import "aos/dist/aos.css";
 
 const MyBooks = () => {
   const { user } = useAuth();
@@ -20,12 +19,6 @@ const MyBooks = () => {
   const [refresh, setRefresh] = useState(true);
 
   const axiosSecure = useAxiosSecure();
-
-  // Animaton
-
-  useEffect(() => {
-    Aos.init();
-  }, []);
 
   useEffect(() => {
     axiosSecure.get(`/all-books?email=${user?.email}`).then((data) => {
@@ -125,10 +118,14 @@ const MyBooks = () => {
   }
 
   return (
-    <div>
+    <motion.div
+    initial={{opacity: 0, y:20}}
+    animate={{opacity: 1, y:0}}
+    transition={{duration:0.5}}
+    className="md:px-6 px-2">
       <title>My Books | The Book Haven</title>
       <MyContainer>
-        <div data-aos="fade-up" className="my-5 rounded-2xl bg-blue-950 min-h-screen">
+        <div className="my-5  rounded-2xl bg-blue-950 min-h-screen">
           <div>
             <div className="overflow-x-auto rounded-xl">
               <table className="table">
@@ -302,7 +299,7 @@ const MyBooks = () => {
           </div>
         </dialog>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
