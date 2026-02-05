@@ -1,36 +1,36 @@
 import React from "react";
 import { HiOutlineLibrary, HiOutlineSparkles, HiOutlineCloudDownload, HiOutlineChatAlt2 } from "react-icons/hi";
 
+const features = [
+  { 
+    title: "Vast Library", 
+    desc: "Over 50 books from fiction to non-fiction, curated for excellence.", 
+    icon: <HiOutlineLibrary className="text-3xl" />,
+    color: "from-blue-500 to-cyan-400"
+  },
+  { 
+    title: "Smart Recommendations", 
+    desc: "Books tailored to your taste using our personalized discovery engine.", 
+    icon: <HiOutlineSparkles className="text-3xl" />,
+    color: "from-emerald-500 to-teal-400"
+  },
+  { 
+    title: "Offline Access", 
+    desc: "Download your favorites and enjoy uninterrupted reading anywhere.", 
+    icon: <HiOutlineCloudDownload className="text-3xl" />,
+    color: "from-amber-500 to-orange-400"
+  },
+  { 
+    title: "Reader Community", 
+    desc: "Engage with other book lovers and see honest reviews before choosing.", 
+    icon: <HiOutlineChatAlt2 className="text-3xl" />,
+    color: "from-purple-500 to-pink-400"
+  },
+];
 export const FeaturesSection = () => {
-  const features = [
-    { 
-      title: "Vast Library", 
-      desc: "Over 50 books from fiction to non-fiction, curated for excellence.", 
-      icon: <HiOutlineLibrary className="text-3xl" />,
-      color: "from-blue-500 to-cyan-400"
-    },
-    { 
-      title: "Smart Recommendations", 
-      desc: "Books tailored to your taste using our personalized discovery engine.", 
-      icon: <HiOutlineSparkles className="text-3xl" />,
-      color: "from-emerald-500 to-teal-400"
-    },
-    { 
-      title: "Offline Access", 
-      desc: "Download your favorites and enjoy uninterrupted reading anywhere.", 
-      icon: <HiOutlineCloudDownload className="text-3xl" />,
-      color: "from-amber-500 to-orange-400"
-    },
-    { 
-      title: "Reader Community", 
-      desc: "Engage with other book lovers and see honest reviews before choosing.", 
-      icon: <HiOutlineChatAlt2 className="text-3xl" />,
-      color: "from-purple-500 to-pink-400"
-    },
-  ];
 
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section className="py-24 md:px-6 px-2 relative overflow-hidden">
       {/* Section Header */}
       <div className="relative z-10 mb-16 text-center md:text-left">
         <span className="text-emerald-500 font-bold tracking-[0.2em] uppercase text-xs">Why Choose Us</span>

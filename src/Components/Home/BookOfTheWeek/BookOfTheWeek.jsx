@@ -2,7 +2,8 @@ import { FiBookOpen, FiStar, FiCheckCircle } from "react-icons/fi";
 
 const BookOfTheWeek = () => {
   return (
-    <div className="my-12  md:my-24 overflow-hidden rounded-3xl  light:bg-gradient-to-br  from-slate-50 to-slate-100 dark:bg-base-300 border border-slate-200 shadow-xl">
+    <div className="md:px-6 px-2">
+    <div className="my-12 md:px-6 px-2 md:my-24 overflow-hidden rounded-3xl  light:bg-gradient-to-br  from-slate-50 to-slate-100 dark:bg-base-300 border border-slate-200 shadow-xl">
       <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 p-8 md:p-12">
         
         {/* Left Side: Content */}
@@ -52,6 +53,7 @@ const BookOfTheWeek = () => {
         </div>
 
       </div>
+    </div>
     </div>
   );
 };

@@ -37,7 +37,8 @@ const FeatureOfThisWeb = () => {
     ];
 
     return (
-        <div className="py-16">
+        
+        <div className="py-16 md:px-6 px-2 ">
             <div className="flex flex-col mb-12">
                 <h2 className="text-3xl font-black text-slate-800 dark:text-white uppercase tracking-tighter">
                     Platform <span className="text-emerald-500">Capabilities</span>
