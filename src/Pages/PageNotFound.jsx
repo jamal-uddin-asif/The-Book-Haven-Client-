@@ -7,16 +7,16 @@ const PageNotFound = () => {
   return (
     <div className='bg-white dark:bg-slate-950 flex flex-col justify-center items-center min-h-screen px-6 text-center overflow-hidden relative transition-colors duration-500'>
       
-      {/* Background Decorative Glow - Adjusts opacity based on mode */}
+  
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-emerald-500/10 dark:bg-emerald-500/5 rounded-full blur-[120px] -z-0"></div>
 
       <div className="relative z-10">
-        {/* Floating 404 Text - Light Gray in light mode, faint white in dark mode */}
+    
         <motion.h1 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className='text-[10rem] md:text-[15rem] font-black text-slate-100 dark:text-white/5 uppercase tracking-tighter leading-none select-none'
+          className='text-[10rem] md:text-[15rem] font-black text-slate-200 dark:text-white/5 uppercase tracking-tighter leading-none select-none'
         >
           404
         </motion.h1>
@@ -41,7 +41,7 @@ const PageNotFound = () => {
             The page you're looking for has been moved, archived, or simply never existed in our library.
           </motion.p>
 
-          {/* Action Button */}
+    
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -58,7 +58,7 @@ const PageNotFound = () => {
         </div>
       </div>
 
-      {/* Subtle Bottom Credit */}
+
       <motion.p 
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.4 }}
