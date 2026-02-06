@@ -6,6 +6,7 @@ import {
   HiSquares2X2,
   HiChevronRight,
 } from "react-icons/hi2";
+import { Link } from "react-router";
 
 const categories = [
   {
@@ -34,9 +35,8 @@ const categories = [
   },
 ];
 export const CategoriesSection = () => {
-
   return (
-    <section className="py-20 px-6 max-w-7xl mx-auto">
+    <Link to={'/all-books'} className="py-20 px-6 max-w-7xl mx-auto">
       {/* Signature Title */}
       <div className="mb-14">
         <h2 className="text-3xl font-black text-slate-800 dark:text-white uppercase tracking-tighter">
@@ -50,13 +50,10 @@ export const CategoriesSection = () => {
           <div
             key={index}
             className={`group cursor-pointer relative p-10 rounded-3xl 
-                       bg-white dark:bg-slate-900 
-             
+                       bg-white dark:bg-slate-900           
                        border border-slate-200 dark:border-slate-800 
-                     
                        shadow-[0_4px_12px_rgba(0,0,0,0.03)] 
                        transition-all duration-500 ease-out
-                      
                        hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] 
                        hover:-translate-y-2 hover:bg-slate-50/50 
                        dark:hover:bg-slate-800/50 ${cat.border}`}
@@ -89,6 +86,6 @@ export const CategoriesSection = () => {
           </div>
         ))}
       </div>
-    </section>
+    </Link>
   );
 };
