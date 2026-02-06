@@ -1,24 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import boy from "../../assets/boy.jpg";
 import MyContainer from "../../Components/MyContainer/MyContainer";
 import { useAuth } from "../../Hooks/useAuth";
 import { useAxiosSecure } from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
-
-import Aos from "aos";
-import "aos/dist/aos.css";
+import { motion } from "framer-motion";
 
 const AddBook = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-
-  // console.log(user)
-
-      // Animaton 
-      
-      useEffect(()=>{
-        Aos.init();
-      },[])
 
   const handleAddBook = (e) => {
     e.preventDefault();
@@ -32,12 +22,11 @@ const AddBook = () => {
     const userName = user?.displayName;
     const create_at = new Date();
 
-    // console.log({title, author, genre, rating, coverImage, summary, userEmail, userName, create_at})
-
     if (!title || !author || !genre || !rating || !coverImage || !summary) {
-      toast.error("Fill the form please");
+      toast.error("Please fill out the entire form");
       return;
     }
+
     const newBook = {
       title,
       author,
@@ -51,111 +40,146 @@ const AddBook = () => {
     };
 
     axiosSecure.post("/books", newBook).then((data) => {
-      // console.log(data)
       e.target.reset();
-      toast.success("Book Added");
+      toast.success("Book Added to Haven!");
     });
   };
 
-  
   return (
-    <div className="">
+    <div className="bg-slate-50 dark:bg-slate-950 min-h-screen transition-colors duration-500">
       <title>Add Book | The Book Haven</title>
       <MyContainer>
-        <div className="my-5 flex justify-around  rounded-2xl  min-h-screen :">
-          <div className="md:flex gap-7 p-2   justify-center items-center  min-h-screen">
-            <div
-              data-aos="fade-right"
-              className=" card   bg-white/10 w-full max-w-sm shrink-0 "
-            >
-              <form onSubmit={handleAddBook} className="p-10 bg-blue-950/20 rounded-2xl ">
-              <h1 className="text-blue-900 dark:text-white text-center py-3 text-2xl font-bold  my-heading ">
-                Add your book
-              </h1>
-                <fieldset className="fieldset">
-                  <label className="label text-gray-300">Title</label>
-                  <input
-                    type="text"
-                    name="title"
-                    className="input   focus:outline-0 rounded-xl "
-                    placeholder="Title"
-                  />
+        <div className="py-12 md:py-20 flex flex-col md:flex-row items-center justify-between gap-12">
+          
+          {/* Form Section - Animated from Left */}
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="w-full max-w-xl"
+          >
+            <div className="bg-white dark:bg-slate-900 shadow-2xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-slate-800 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden">
+              
+              {/* Subtle Decorative Background Glow */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full -mr-16 -mt-16 blur-3xl"></div>
 
-                  <label className="label text-gray-300">Author</label>
-                  <input
-                    type="text"
-                    name="author"
-                    className="input focus:outline-0 rounded-xl"
-                    placeholder="Author"
-                  />
+              <div className="relative z-10">
+                <header className="mb-10 text-center md:text-left">
+                  <h1 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white uppercase tracking-tighter">
+                    Add Your <span className="text-emerald-500">Book</span>
+                  </h1>
+                  <div className="h-1.5 w-12 bg-emerald-500 mt-2 rounded-full mx-auto md:mx-0"></div>
+                </header>
 
-                  {/* genre  */}
-                  <div className="flex justify-around">
-                    <div>
-                      <label className="label text-gray-300">Genre</label>
+                <form onSubmit={handleAddBook} className="space-y-5">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    {/* Title */}
+                    <div className="flex flex-col gap-2">
+                      <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">Title</label>
+                      <input
+                        type="text"
+                        name="title"
+                        className="w-full px-5 py-3.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all dark:text-white"
+                        placeholder="Enter book title"
+                      />
+                    </div>
+
+                    {/* Author */}
+                    <div className="flex flex-col gap-2">
+                      <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">Author</label>
+                      <input
+                        type="text"
+                        name="author"
+                        className="w-full px-5 py-3.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all dark:text-white"
+                        placeholder="Author name"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    {/* Genre */}
+                    <div className="flex flex-col gap-2">
+                      <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">Genre</label>
                       <select
-                        defaultValue="Pick a font"
-                        className="select "
                         name="genre"
+                        className="w-full px-5 py-3.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl focus:border-emerald-500 outline-none dark:text-white cursor-pointer appearance-none"
                       >
-                        <option disabled={true}>Pick one</option>
                         <option value="Fantasy">Fantasy</option>
                         <option value="Mystery">Mystery</option>
-                        <option value="Not-Fiction">Not-Fiction</option>
+                        <option value="Non-Fiction">Non-Fiction</option>
                         <option value="Other">Other</option>
                       </select>
                     </div>
 
-                    <div>
-                      <label className="label text-gray-300">Rating</label>
+                    {/* Rating */}
+                    <div className="flex flex-col gap-2">
+                      <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">Rating</label>
                       <select
-                        defaultValue="Pick a font"
-                        className="select "
                         name="rating"
+                        className="w-full px-5 py-3.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl focus:border-emerald-500 outline-none dark:text-white cursor-pointer appearance-none"
                       >
-                        <option disabled={true}>Pick one</option>
-                        <option value="1">Rating 1</option>
-                        <option value="2">Rating 2</option>
-                        <option value="3">Rating 3 </option>
-                        <option value="4">Rating 4</option>
-                        <option value="5">Rating 5</option>
+                        <option value="5">5 Stars</option>
+                        <option value="4">4 Stars</option>
+                        <option value="3">3 Stars</option>
+                        <option value="2">2 Stars</option>
+                        <option value="1">1 Star</option>
                       </select>
                     </div>
                   </div>
 
-                  <label className="label text-gray-300">Cover Image</label>
-                  <input
-                    type="url"
-                    name="coverImage"
-                    className="input focus:outline-0 rounded-xl"
-                    placeholder="Image URL"
-                  />
+                  {/* Cover Image */}
+                  <div className="flex flex-col gap-2">
+                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">Cover Image URL</label>
+                    <input
+                      type="url"
+                      name="coverImage"
+                      className="w-full px-5 py-3.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl focus:border-emerald-500 outline-none dark:text-white"
+                      placeholder="https://example.com/image.jpg"
+                    />
+                  </div>
 
-                  <label className="label text-gray-300">Summary</label>
-                  <textarea
-                    className="bg-white rounded-2xl p-2"
-                    name="summary"
-                    rows={8}
-                    cols={9}
-                    id=""
-                  ></textarea>
+                  {/* Summary */}
+                  <div className="flex flex-col gap-2">
+                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">Summary</label>
+                    <textarea
+                      name="summary"
+                      rows={4}
+                      className="w-full px-5 py-3.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl focus:border-emerald-500 outline-none dark:text-white resize-none"
+                      placeholder="Briefly describe the book..."
+                    ></textarea>
+                  </div>
 
-                  <button className="text-white dark:text-black p-2 my-2 rounded-sm  bg-blue-950 dark:bg-blue-50   opacity-65 text-xl  mt-4">
+                  {/* Submit Button */}
+                  <motion.button 
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black uppercase tracking-[0.2em] py-4 rounded-2xl transition-all shadow-lg shadow-emerald-500/20 mt-4"
+                  >
                     Add Book
-                  </button>
-                </fieldset>
-              </form>
+                  </motion.button>
+                </form>
+              </div>
             </div>
+          </motion.div>
 
-            {/* righ side  */}
-            <div  data-aos="fade-left" className="flex-1">
-              <img
-                className="max-h-[600px] rounded-2xl md:block hidden"
-                src={boy}
-                alt=""
-              />
-            </div>
-          </div>
+        
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex-1 hidden md:flex justify-center relative"
+          >
+            {/* Background Glow behind image */}
+            <div className="absolute inset-0 bg-emerald-500/20 blur-[120px] rounded-full -z-10 animate-pulse"></div>
+            
+            <motion.img
+              animate={{ y: [0, -20, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="max-h-[580px] rounded-[3rem] shadow-2xl border-8 border-white dark:border-slate-900 object-cover rotate-2"
+              src={boy}
+              alt="Illustration"
+            />
+          </motion.div>
         </div>
       </MyContainer>
     </div>
