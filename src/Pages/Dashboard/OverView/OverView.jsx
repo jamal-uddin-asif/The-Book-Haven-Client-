@@ -16,6 +16,7 @@ import {
   Pie,
 } from "recharts";
 import MyContainer from "../../../Components/MyContainer/MyContainer";
+import LoadingSpinner from "../../../Components/LoadingSpinner/LoadingSpinner";
 
 const OverView = () => {
   const { user } = useAuth();
@@ -53,6 +54,7 @@ const OverView = () => {
     });
   }, [axiosSecure]);
 
+  if(loadingMybook || loadingTotalBook || loadingGenre) return <LoadingSpinner/> 
   return (
     <div className="p-3">
       <div>
