@@ -22,6 +22,9 @@ const OverView = () => {
   const [books, setMyBooks] = useState([]);
   const [totalBooks, setTotalBooks] = useState([]);
   const [countGenre, setCountGenre] = useState([]);
+
+  const [loadingMybook, setLoadingMybook] = useState(true);
+  const [loadingTotalBook, setLoadingTotalBook] = useState(true);
   const axiosSecure = useAxiosSecure();
   useEffect(() => {
     axiosSecure.get(`/all-books?email=${user?.email}`).then((data) => {
@@ -42,7 +45,7 @@ const OverView = () => {
     });
   }, [axiosSecure]);
 
-  console.log(countGenre);
+  // if()
   return (
     <div className="p-3">
       <div>
@@ -64,7 +67,7 @@ const OverView = () => {
             <div className="mt-6 flex items-center gap-3">
               <h2 className="text-3xl font-bold  flex items-center gap-1">
                 <FaBook />
-                {books.length}
+                {books?.result?.length}
               </h2>
             </div>
 
@@ -88,7 +91,7 @@ const OverView = () => {
             <div className="mt-6 flex items-center gap-3">
               <h2 className="text-3xl font-bold  flex items-center gap-1">
                 <FaSwatchbook />
-                {totalBooks.length}
+                {totalBooks?.result?.length}
               </h2>
             </div>
 
