@@ -19,33 +19,40 @@ import MyContainer from "../../../Components/MyContainer/MyContainer";
 
 const OverView = () => {
   const { user } = useAuth();
-  const [books, setMyBooks] = useState([]);
+  const [mybooks, setMyBooks] = useState([]);
   const [totalBooks, setTotalBooks] = useState([]);
   const [countGenre, setCountGenre] = useState([]);
 
   const [loadingMybook, setLoadingMybook] = useState(true);
-  const [loadingTotalBook, setLoadingTotalBook] = useState(true);
+  const [loadingTotalBook, setLoadingTotalBooks] = useState(true);
+  const [loadingGenre, setLoadingGenre] = useState(true);
+
   const axiosSecure = useAxiosSecure();
   useEffect(() => {
+    setLoadingMybook(true)
     axiosSecure.get(`/all-books?email=${user?.email}`).then((data) => {
       setMyBooks(data.data);
+      setLoadingMybook(false)
     });
   }, [user, axiosSecure]);
 
   useEffect(() => {
+    setLoadingTotalBooks(true)
     axiosSecure.get("/all-books").then((data) => {
       setTotalBooks(data.data);
+      setLoadingTotalBooks(false)
     });
   }, [axiosSecure]);
   console.log({countGenre});
 
   useEffect(() => {
+    setLoadingGenre(true)
     axiosSecure.get("/count-genre").then((data) => {
       setCountGenre(data.data);
+      setLoadingGenre(false)
     });
   }, [axiosSecure]);
 
-  // if()
   return (
     <div className="p-3">
       <div>
@@ -67,7 +74,7 @@ const OverView = () => {
             <div className="mt-6 flex items-center gap-3">
               <h2 className="text-3xl font-bold  flex items-center gap-1">
                 <FaBook />
-                {books?.result?.length}
+                {mybooks?.result?.length}
               </h2>
             </div>
 
