@@ -2,13 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import MyContainer from "../../Components/MyContainer/MyContainer";
 import { useAuth } from "../../Hooks/useAuth";
 import { useAxiosSecure } from "../../Hooks/useAxiosSecure";
-import { FaStar } from "react-icons/fa6";
+import { FaPenClip, FaStar } from "react-icons/fa6";
 import { Link } from "react-router";
 import { SyncLoader } from "react-spinners";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { motion } from "framer-motion";
-
+import { IoTrashBinSharp } from "react-icons/io5";
 
 const MyBooks = () => {
   const { user } = useAuth();
@@ -125,7 +125,7 @@ const MyBooks = () => {
     className="md:px-6 px-2">
       <title>My Books | The Book Haven</title>
       <MyContainer>
-        <div className="my-5  rounded-2xl bg-blue-950 min-h-screen">
+        <div className="my-5  rounded-2xl bg-white dark:bg-base-100 min-h-screen">
           <div>
             <div className="overflow-x-auto rounded-xl">
               <table className="table">
@@ -144,9 +144,8 @@ const MyBooks = () => {
                 <tbody>
                   {books?.map((book, i) => (
                     <tr
-                      className={`${
-                        i % 2 === 0 ? "bg-base-300" : "bg-base-100"
-                      } shadow-2xl`}
+                    key={i}
+                      className={`bg-white dark:bg-base-100 dark:hover:bg-base-300 hover:bg-slate-50 shadow-2xl`}
                     >
                       <td>
                         <div className="flex items-center gap-3">
@@ -174,17 +173,17 @@ const MyBooks = () => {
                       <td>
                         <button
                           onClick={() => handleOpenModalAndFetch(book?._id)}
-                          className="bg-green-600 text-[#FED3D1] p-1.5 rounded-sm"
+                          className="hover:bg-slate-200  text-[#FED3D1] p-3 rounded-sm"
                         >
-                          Update
+                        <FaPenClip size={20} color="green"/>
                         </button>
                       </td>
                       <td>
                         <button
                           onClick={() => handleDelete(book._id)}
-                          className="p-2.5 my-2 rounded-sm  bg-red-700 text-[#FED3D1] opacity-65 hover:bg-green-500"
+                          className="p-2.5 my-2 rounded-sm  opacity-65 hover:bg-red-700"
                         >
-                          Delete
+                          <IoTrashBinSharp size={20} color="red" />
                         </button>
                       </td>
                     </tr>
@@ -283,15 +282,15 @@ const MyBooks = () => {
                         defaultValue={updateBook.summary}
                       ></textarea>
 
-                      <button className="text-[#5d806a] rounded-full text-xl btn bg-linear-to-br from-[#FED3D1] to-[#a58c8b] mt-4">
-                        Update Now
+                      <button className="rounded-sm font-bold bg-slate-300 text-xl btn mt-4">
+                        Update Now 
                       </button>
                     </fieldset>
                   </form>
                 </div>
               </div>
               <form method="dialog">
-                <button className="rounded-sm px-2 py-1 bg-red-600 text-white">
+                <button className="rounded-sm px-2 py-1  text-2xl">
                   X
                 </button>
               </form>
